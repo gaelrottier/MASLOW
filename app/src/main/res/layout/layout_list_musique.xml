@@ -9,6 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Titre Chansson"
         android:id="@+id/titre_musique"
+        android:background="@color/colorItemMusique"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -16,5 +17,6 @@
         android:layout_height="wrap_content"
         android:text="Artiste"
         android:id="@+id/artiste_musique"
+        android:background="@color/colorItemArtiste"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

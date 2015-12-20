@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBtnPlaylist">#3ae0f2</color>
+    <color name="colorItemMusique">#FFBEEEA1</color>
+    <color name="colorItemArtiste">#FF8CEC51</color>
 </resources>

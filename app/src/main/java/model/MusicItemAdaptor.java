@@ -6,15 +6,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import fr.unice.mbds.maslow.R;
 
 /**
  * Created by Zac on 20/12/2015.
  */
 public class MusicItemAdaptor extends BaseAdapter {
     private Context context;
-    private List<Musique> musiques = new ArrayList<>();
+    private List<Musique> musiques;
 
     public MusicItemAdaptor(Context context, List<Musique> musiques) {
         this.context = context;
@@ -23,12 +24,12 @@ public class MusicItemAdaptor extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return musiques.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Musique getItem(int position) {
+        return musiques.get(position);
     }
 
     @Override
@@ -38,7 +39,23 @@ public class MusicItemAdaptor extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View v = convertView;
+        MusiqueViewHolder viewHolder = null;
+        if (v==null){
+            v = View.inflate(context, R.layout.layout_list_musique, null);
+            viewHolder = new MusiqueViewHolder();
+            viewHolder.titre = (TextView) v.findViewById(R.id.titre_musique);
+            viewHolder.artiste = (TextView) v.findViewById(R.id.artiste_musique);
+            v.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (MusiqueViewHolder) v.getTag();
+        }
+        Musique musique = musiques.get(position);
+        viewHolder.titre.setText(musique.getTitre());
+        viewHolder.artiste.setText(musique.getArtiste());
+
+        return v;
     }
 }
 
