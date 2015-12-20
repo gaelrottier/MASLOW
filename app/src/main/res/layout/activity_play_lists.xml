@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fr.unice.mbds.maslow.PlayListsActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Playlist Commune"
+        android:id="@+id/btn_playlist_commune"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorBtnPlaylist"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Playlist Salle de bain"
+        android:id="@+id/btn_playlist_sbain"
+        android:layout_below="@+id/btn_playlist_commune"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorBtnPlaylist"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Playlist Chambre"
+        android:id="@+id/btn_playlist_chambre"
+        android:layout_below="@+id/btn_playlist_sbain"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorBtnPlaylist"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Playlist Salon"
+        android:id="@+id/btn_playlist_salon"
+        android:layout_below="@+id/btn_playlist_chambre"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorBtnPlaylist"/>
+
+</RelativeLayout>
