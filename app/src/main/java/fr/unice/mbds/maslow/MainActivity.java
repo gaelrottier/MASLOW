@@ -1,6 +1,5 @@
 package fr.unice.mbds.maslow;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.GridView;
@@ -8,7 +7,7 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MainItemAdaptor;
+import adapters.MainItemAdaptor;
 
 public class MainActivity extends AppCompatActivity {
 

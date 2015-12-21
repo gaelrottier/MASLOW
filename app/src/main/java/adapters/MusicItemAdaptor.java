@@ -1,4 +1,4 @@
-package model;
+package adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.unice.mbds.maslow.R;
+import object.Musique;
 
 /**
  * Created by Zac on 20/12/2015.

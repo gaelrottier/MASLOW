@@ -7,8 +7,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MusicItemAdaptor;
-import model.Musique;
+import adapters.MusicItemAdaptor;
+import object.Musique;
 
 public class ListeMusiquesActivity extends AppCompatActivity {
     ListView listView;

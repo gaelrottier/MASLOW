@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.Musique;
+import object.Musique;
 
 public class PlayListsActivity extends AppCompatActivity {
     protected Musique musique;
