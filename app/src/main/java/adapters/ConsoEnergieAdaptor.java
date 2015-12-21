@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,14 +20,14 @@ public class ConsoEnergieAdaptor extends BaseAdapter {
 
     private Context context;
     private Map<String, String> appareils;
-    List<String> nomAppareils;
-    List<String> consoEnergie;
+    List<String> nomAppareils = new ArrayList<>();
+    List<String> consoEnergie = new ArrayList<>();
 
     public ConsoEnergieAdaptor(Context context, Map<String, String> appareils) {
         this.context = context;
         this.appareils = appareils;
 
-        for(Map.Entry<String, String> entry :appareils.entrySet()){
+        for (Map.Entry<String, String> entry : appareils.entrySet()) {
             nomAppareils.add(entry.getKey());
             consoEnergie.add(entry.getValue());
         }

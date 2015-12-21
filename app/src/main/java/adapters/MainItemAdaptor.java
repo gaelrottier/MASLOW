@@ -48,7 +48,7 @@ public class MainItemAdaptor extends BaseAdapter {
 
         AQuery aq = new AQuery(convertView);
 
-        aq.id(convertView.findViewById(R.id.activity_main_img_view)).image(R.drawable.fff);
+        aq.id(convertView.findViewById(R.id.activity_main_img_view)).image(R.drawable.fff).width(150).height(150);
 
         aq.id(convertView).clicked(new View.OnClickListener() {
             @Override

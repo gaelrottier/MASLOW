@@ -31,5 +31,6 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
         appareils.put("Chauffage", "50W");
 
         adaptor = new ConsoEnergieAdaptor(getApplicationContext(), appareils);
+        listeAppareils.setAdapter(adaptor);
     }
 }

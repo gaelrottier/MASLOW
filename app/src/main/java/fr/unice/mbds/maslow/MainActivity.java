@@ -1,7 +1,7 @@
 package fr.unice.mbds.maslow;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
         List<Class<? extends AppCompatActivity>> listeBoutons = new ArrayList<>();
 
         listeBoutons.add(PlayListsActivity.class);
-        listeBoutons.add(ListeMusiquesActivity.class);
+        listeBoutons.add(ListeConsoEnergieActivity.class);
 
         adaptor = new MainItemAdaptor(getApplicationContext(), listeBoutons);
+        gridViewListeBoutons.setAdapter(adaptor);
 
         //start playlist activity
         //startActivity(new Intent(this, PlayListsActivity.class));
