@@ -43,7 +43,7 @@ public class MusicItemAdaptor extends BaseAdapter {
         View v = convertView;
         MusiqueViewHolder viewHolder = null;
         if (v==null){
-            v = View.inflate(context, R.layout.layout_list_musique, null);
+            v = View.inflate(context, R.layout.activity_liste_musiques_item, null);
             viewHolder = new MusiqueViewHolder();
             viewHolder.titre = (TextView) v.findViewById(R.id.titre_musique);
             viewHolder.artiste = (TextView) v.findViewById(R.id.artiste_musique);
