@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         listeBoutons.add(PlayListsActivity.class);
         listeBoutons.add(ListeConsoEnergieActivity.class);
+        listeBoutons.add(ListeLumieresActivity.class);
 
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
