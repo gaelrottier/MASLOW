@@ -14,11 +14,11 @@ import object.Musique;
 /**
  * Created by Zac on 20/12/2015.
  */
-public class MusicItemAdaptor extends BaseAdapter {
+public class MusicItemAdapter extends BaseAdapter {
     private Context context;
     private List<Musique> musiques;
 
-    public MusicItemAdaptor(Context context, List<Musique> musiques) {
+    public MusicItemAdapter(Context context, List<Musique> musiques) {
         this.context = context;
         this.musiques = musiques;
     }

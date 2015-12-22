@@ -16,16 +16,14 @@ import fr.unice.mbds.maslow.R;
 /**
  * Created by Gael on 21/12/2015.
  */
-public class ConsoEnergieAdaptor extends BaseAdapter {
+public class ConsoEnergieItemAdapter extends BaseAdapter {
 
     private Context context;
-    private Map<String, String> appareils;
     List<String> nomAppareils = new ArrayList<>();
     List<String> consoEnergie = new ArrayList<>();
 
-    public ConsoEnergieAdaptor(Context context, Map<String, String> appareils) {
+    public ConsoEnergieItemAdapter(Context context, Map<String, String> appareils) {
         this.context = context;
-        this.appareils = appareils;
 
         for (Map.Entry<String, String> entry : appareils.entrySet()) {
             nomAppareils.add(entry.getKey());
@@ -35,12 +33,12 @@ public class ConsoEnergieAdaptor extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return appareils.size();
+        return nomAppareils.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return nomAppareils.get(position) + " : " + consoEnergie.get(position);
     }
 
     @Override

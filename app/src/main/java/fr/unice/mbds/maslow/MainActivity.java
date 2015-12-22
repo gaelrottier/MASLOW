@@ -7,12 +7,12 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapters.MainItemAdaptor;
+import adapters.MainItemAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     private GridView gridViewListeBoutons;
-    private MainItemAdaptor adaptor;
+    private MainItemAdapter adaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
         listeBoutons.add(PlayListsActivity.class);
         listeBoutons.add(ListeConsoEnergieActivity.class);
 
-        adaptor = new MainItemAdaptor(getApplicationContext(), listeBoutons);
+        adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
-
-        //start playlist activity
-        //startActivity(new Intent(this, PlayListsActivity.class));
     }
 }

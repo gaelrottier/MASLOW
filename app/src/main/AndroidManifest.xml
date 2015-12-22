@@ -17,10 +17,13 @@
         </activity>
         <activity
             android:name=".PlayListsActivity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".ListeMusiquesActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ListeMusiquesActivity"
+            android:parentActivityName=".PlayListsActivity"/>
         <activity
             android:name=".ListeConsoEnergieActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ListeLumieresActivity"
             android:parentActivityName=".MainActivity"></activity>
     </application>
 

@@ -7,7 +7,7 @@ import android.widget.ListView;
 import java.util.HashMap;
 import java.util.Map;
 
-import adapters.ConsoEnergieAdaptor;
+import adapters.ConsoEnergieItemAdapter;
 
 /**
  * Created by Gael on 21/12/2015.
@@ -15,7 +15,7 @@ import adapters.ConsoEnergieAdaptor;
 public class ListeConsoEnergieActivity extends AppCompatActivity {
 
     private ListView listeAppareils;
-    private ConsoEnergieAdaptor adaptor;
+    private ConsoEnergieItemAdapter adaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
         appareils.put("Lave linge", "70W");
         appareils.put("Chauffage", "50W");
 
-        adaptor = new ConsoEnergieAdaptor(getApplicationContext(), appareils);
+        adaptor = new ConsoEnergieItemAdapter(getApplicationContext(), appareils);
         listeAppareils.setAdapter(adaptor);
     }
 }

@@ -16,11 +16,11 @@ import fr.unice.mbds.maslow.R;
 /**
  * Created by Gael on 20/12/2015.
  */
-public class MainItemAdaptor extends BaseAdapter {
+public class MainItemAdapter extends BaseAdapter {
     private Context context;
     private List<Class<? extends AppCompatActivity>> boutons;
 
-    public MainItemAdaptor(Context context, List<Class<? extends AppCompatActivity>> boutons) {
+    public MainItemAdapter(Context context, List<Class<? extends AppCompatActivity>> boutons) {
         this.context = context;
         this.boutons = boutons;
     }
