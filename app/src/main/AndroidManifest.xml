@@ -17,7 +17,8 @@
         </activity>
         <activity
             android:name=".PlayListsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ListeMusiquesActivity"
             android:parentActivityName=".PlayListsActivity" />
