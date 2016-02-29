@@ -14,15 +14,21 @@ import java.util.List;
 import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.SocketTest;
+import im.delight.android.ddp.Meteor;
+import im.delight.android.ddp.MeteorCallback;
 
 /**
  * Created by Gael on 21/12/2015.
  */
-public class LumieresItemAdapter extends BaseAdapter {
+public class LumieresItemAdapter extends BaseAdapter  {
 
     private Context context;
     List<String> nomLumieres = new ArrayList<>();
     List<String> checked = new ArrayList<>();
+    SocketTest socketTest=new SocketTest();
+
+
 
     public LumieresItemAdapter(Context context, Map<String, String> lumieres) {
         this.context = context;
@@ -31,6 +37,8 @@ public class LumieresItemAdapter extends BaseAdapter {
             nomLumieres.add(entry.getKey());
             checked.add(entry.getValue());
         }
+
+        socketTest.meteorCallback(context);
     }
 
     @Override
@@ -48,30 +56,35 @@ public class LumieresItemAdapter extends BaseAdapter {
         return position;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = View.inflate(context, R.layout.activity_liste_lumieres_item, null);
-        }
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
 
-        AQuery aq = new AQuery(convertView);
-
-        aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_appareil)).text(nomLumieres.get(position));
-
-        Switch swtch = (Switch) aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_switch)).getView();
-
-        swtch.setChecked(Boolean.parseBoolean(checked.get(position)));
-
-        swtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    //TODO
-                }else{
-                    //TODO
-                }
-            }
-        });
-        return convertView;
+    if (convertView == null) {
+        convertView = View.inflate(context, R.layout.activity_liste_lumieres_item, null);
     }
+
+    AQuery aq = new AQuery(convertView);
+
+    aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_appareil)).text(nomLumieres.get(position));
+
+    Switch swtch = (Switch) aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_switch)).getView();
+
+    swtch.setChecked(Boolean.parseBoolean(checked.get(position)));
+
+    swtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked){
+                System.out.println("on");
+                socketTest.switchOff();
+            }else{
+                System.out.println("off");
+                socketTest.switchOn();
+            }
+        }
+    });
+    return convertView;
+}
+
+
 }

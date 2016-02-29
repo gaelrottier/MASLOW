@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.unice.mbds.maslow">
 
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,11 +22,26 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/list_tech" />
         </activity>
         <activity
             android:name=".PlayListsActivity"
-            android:parentActivityName=".MainActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ListeMusiquesActivity"
             android:parentActivityName=".PlayListsActivity" />
@@ -28,8 +51,19 @@
         <activity
             android:name=".ListeLumieresActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ListeDiffuseurOdeursActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".ListeDiffuseurOdeursActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SocketTest"
+            android:label="@string/title_activity_socket_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".sendJsonData"
+            android:label="@string/title_activity_send_json_data"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

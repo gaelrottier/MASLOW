@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MASLOW</string>
+    <string name="title_activity_socket_test">SocketTest</string>
+    <string name="title_activity_send_json_data">sendJsonData</string>
 </resources>
