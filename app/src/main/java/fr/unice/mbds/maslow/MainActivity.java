@@ -29,6 +29,7 @@ import adapters.MainItemAdapter;
 
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
+import im.delight.android.ddp.MeteorSingleton;
 import im.delight.android.ddp.ResultListener;
 
 public class MainActivity extends AppCompatActivity  {
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity  {
     NfcAdapter nfcAdapter;
     public static final String TAG = "NfcDemo";
     public static final String MIME_TEXT_PLAIN = "text/plain";
+    public MeteorSingleton mMeteor;
+    SocketTest socketTest=new SocketTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity  {
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
 
+         mMeteor=socketTest.meteorCallback(this);
 
 
          nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity  {
         } else {
             Toast.makeText(this, "NFC NOT AVAILABLE", Toast.LENGTH_LONG).show();
         }
+
+
 
     }
 

@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import fr.unice.mbds.maslow.MainActivity;
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.SocketTest;
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
+import im.delight.android.ddp.MeteorSingleton;
 
 /**
  * Created by Gael on 21/12/2015.
@@ -27,6 +29,10 @@ public class LumieresItemAdapter extends BaseAdapter  {
     List<String> nomLumieres = new ArrayList<>();
     List<String> checked = new ArrayList<>();
     SocketTest socketTest=new SocketTest();
+    MeteorSingleton mMeteor;
+
+  //  MainActivity main=new MainActivity();
+
 
 
 
@@ -37,8 +43,7 @@ public class LumieresItemAdapter extends BaseAdapter  {
             nomLumieres.add(entry.getKey());
             checked.add(entry.getValue());
         }
-
-        socketTest.meteorCallback(context);
+     //   mMeteor=main.mMeteor;
     }
 
     @Override
@@ -76,10 +81,10 @@ public View getView(int position, View convertView, ViewGroup parent) {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
                 System.out.println("on");
-                socketTest.switchOff();
+                socketTest.switchOff(mMeteor.getInstance());
             }else{
                 System.out.println("off");
-                socketTest.switchOn();
+                socketTest.switchOn(mMeteor.getInstance());
             }
         }
     });

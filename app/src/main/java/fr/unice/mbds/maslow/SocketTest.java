@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
+import im.delight.android.ddp.MeteorSingleton;
 import im.delight.android.ddp.ResultListener;
 
 public class SocketTest extends AppCompatActivity implements MeteorCallback {
@@ -30,20 +31,19 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
     private static final String ON_COMMAND_ID = "XHLQQ5yvhNNmv7Rad";
     private static final String OFF_COMMAND_ID = "kmvdPAgvFZ7dhRk6N";
 
-    private Meteor mMeteor;
+    private MeteorSingleton mMeteor;
 
 
 
-
-
-    public void meteorCallback(Context context)
+    public MeteorSingleton meteorCallback(Context context)
     {
 
-        mMeteor = new Meteor(context, SOCKET_URL);
-        mMeteor.setCallback(this);
+        mMeteor = MeteorSingleton.createInstance(context, "ws://134.59.152.114:3000/websocket");
+        mMeteor.getInstance().setCallback(this);
+        return mMeteor;
     }
 
-    public void switchOn()
+    public void switchOn(MeteorSingleton mMeteor)
     {
         if (mMeteor.isLoggedIn()) {
             mMeteor.call("sendCommandById", new Object[]{ON_COMMAND_ID}, new ResultListener() {
@@ -65,7 +65,7 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
         }
     }
 
-                public void switchOff()
+                public void switchOff(MeteorSingleton mMeteor)
                 {
                     if (mMeteor.isLoggedIn()) {
                         mMeteor.call("sendCommandById", new Object[]{OFF_COMMAND_ID}, new ResultListener() {
