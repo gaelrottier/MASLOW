@@ -1,4 +1,4 @@
-package fr.unice.mbds.maslow;
+package fr.unice.mbds.maslow.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,8 @@ import android.widget.ListView;
 import java.util.HashMap;
 import java.util.Map;
 
-import adapters.ConsoEnergieItemAdapter;
+import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.view.adapter.ConsoEnergieItemAdapter;
 
 /**
  * Created by Gael on 21/12/2015.

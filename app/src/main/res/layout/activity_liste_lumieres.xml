@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.unice.mbds.maslow.ListeLumieresActivity">
+    tools:context=".view.activity.ListeLumieresActivity">
 
     <ListView
         android:id="@+id/activity_liste_lumieres_list_view"

@@ -1,4 +1,4 @@
-package adapters;
+package fr.unice.mbds.maslow.view.adapter;
 
 import android.content.Context;
 import android.view.View;

@@ -1,4 +1,4 @@
-package adapters;
+package fr.unice.mbds.maslow.view.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import fr.unice.mbds.maslow.MainActivity;
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.SocketTest;
-import im.delight.android.ddp.Meteor;
-import im.delight.android.ddp.MeteorCallback;
 import im.delight.android.ddp.MeteorSingleton;
 
 /**

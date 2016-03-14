@@ -1,4 +1,4 @@
-package fr.unice.mbds.maslow;
+package fr.unice.mbds.maslow.view.activity;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -6,16 +6,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
-import android.nfc.Tag;
 import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
+import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,13 +21,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import android.support.v7.app.ActionBarActivity;
-import adapters.MainItemAdapter;
 
-import im.delight.android.ddp.Meteor;
-import im.delight.android.ddp.MeteorCallback;
+import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.SocketTest;
+import fr.unice.mbds.maslow.view.adapter.MainItemAdapter;
 import im.delight.android.ddp.MeteorSingleton;
-import im.delight.android.ddp.ResultListener;
 
 public class MainActivity extends AppCompatActivity  {
     //AppCompatActivity

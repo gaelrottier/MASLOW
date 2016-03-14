@@ -1,30 +1,16 @@
-package fr.unice.mbds.maslow;
+package fr.unice.mbds.maslow.view.activity;
 
 
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Dialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import adapters.LumieresItemAdapter;
-import im.delight.android.ddp.Meteor;
-import im.delight.android.ddp.MeteorCallback;
-import im.delight.android.ddp.ResultListener;
+import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.view.adapter.LumieresItemAdapter;
 
 public class ListeLumieresActivity extends AppCompatActivity  {
 

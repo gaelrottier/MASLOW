@@ -1,15 +1,15 @@
-package fr.unice.mbds.maslow;
+package fr.unice.mbds.maslow.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import adapters.PlayListItemAdapter;
+import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.view.adapter.PlayListItemAdapter;
 
 public class PlayListsActivity extends AppCompatActivity {
     protected int nombrePlayList;

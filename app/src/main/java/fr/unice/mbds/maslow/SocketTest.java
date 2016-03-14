@@ -1,22 +1,14 @@
 package fr.unice.mbds.maslow;
 
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
 import im.delight.android.ddp.MeteorSingleton;
 import im.delight.android.ddp.ResultListener;
@@ -39,7 +31,7 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
     {
 
         mMeteor = MeteorSingleton.createInstance(context, "ws://134.59.152.114:3000/websocket");
-        mMeteor.getInstance().setCallback(this);
+        mMeteor.getInstance().addCallback(this);
         return mMeteor;
     }
 
