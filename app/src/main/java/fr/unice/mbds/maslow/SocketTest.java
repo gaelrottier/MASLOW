@@ -26,17 +26,14 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
     private MeteorSingleton mMeteor;
 
 
-
-    public MeteorSingleton meteorCallback(Context context)
-    {
+    public MeteorSingleton meteorCallback(Context context) {
 
         mMeteor = MeteorSingleton.createInstance(context, "ws://134.59.152.114:3000/websocket");
         mMeteor.getInstance().addCallback(this);
         return mMeteor;
     }
 
-    public void switchOn(MeteorSingleton mMeteor)
-    {
+    public void switchOn(MeteorSingleton mMeteor) {
         if (mMeteor.isLoggedIn()) {
             mMeteor.call("sendCommandById", new Object[]{ON_COMMAND_ID}, new ResultListener() {
                 @Override
@@ -57,26 +54,25 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
         }
     }
 
-                public void switchOff(MeteorSingleton mMeteor)
-                {
-                    if (mMeteor.isLoggedIn()) {
-                        mMeteor.call("sendCommandById", new Object[]{OFF_COMMAND_ID}, new ResultListener() {
-                            @Override
-                            public void onSuccess(String result) {
-                                System.out.println("success");
-                                Log.d(TAG, "Result : " + result);
+    public void switchOff(MeteorSingleton mMeteor) {
+        if (mMeteor.isLoggedIn()) {
+            mMeteor.call("sendCommandById", new Object[]{OFF_COMMAND_ID}, new ResultListener() {
+                @Override
+                public void onSuccess(String result) {
+                    System.out.println("success");
+                    Log.d(TAG, "Result : " + result);
 
-                            }
-
-                            @Override
-                            public void onError(String error, String reason, String details) {
-                                System.out.println("echec");
-                                Log.e(TAG, error + " : " + reason);
-                                Toast.makeText(SocketTest.this, "Failed to send command", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
                 }
+
+                @Override
+                public void onError(String error, String reason, String details) {
+                    System.out.println("echec");
+                    Log.e(TAG, error + " : " + reason);
+                    Toast.makeText(SocketTest.this, "Failed to send command", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
 
 
     //Exécuté lorsque le socket s'est connecté
@@ -110,7 +106,7 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
         try {
             JSONObject reader = new JSONObject(newValueJson);
             //L'identifiant de l'évènement donné par l'interface d'Orchestra doit correspondre au documentID attribué par Mongo
-            if(documentID.compareTo(CONSO_EVENT_ID) == 0){
+            if (documentID.compareTo(CONSO_EVENT_ID) == 0) {
                 //La consomation est donnée dans l'objet "parameters"
                 JSONObject parameters = reader.getJSONObject("parameters");
                 //La consomation nous est donnée sous forme d'entier à la clé "conso"
@@ -125,7 +121,7 @@ public class SocketTest extends AppCompatActivity implements MeteorCallback {
     //Idem que onDataAdded mais est appelé quand la consommation a changé (ou que la prise a changé d'état)
     @Override
     public void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson) {
-        if(documentID.compareTo(CONSO_EVENT_ID) == 0) {
+        if (documentID.compareTo(CONSO_EVENT_ID) == 0) {
             try {
                 JSONObject reader = new JSONObject(updateValuesJson);
                 if (reader.has("parameters")) {

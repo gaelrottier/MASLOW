@@ -1,4 +1,4 @@
-package fr.unice.mbds.maslow.util;
+package fr.unice.mbds.maslow.entities;
 
 /**
  * Created by Gael on 14/03/2016.

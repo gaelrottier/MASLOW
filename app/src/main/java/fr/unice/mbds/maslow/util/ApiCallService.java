@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 
 import com.androidquery.AQuery;
 
+import org.json.JSONArray;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +17,6 @@ public class ApiCallService {
 
     private static ApiCallService instance = null;
     private AQuery aq;
-    private String result;
-    private boolean ready = false;
 
     public static ApiCallService getInstance() {
         if (instance == null) {
@@ -38,19 +38,27 @@ public class ApiCallService {
         execute(caller, progress, url, AQuery.METHOD_DELETE, null, callbackMethodName);
     }
 
-    public void doPost(Activity caller, ProgressDialog progress, String url, HashMap<String, Object> params, String callbackMethodName) {
+    public void doPut(Activity caller, ProgressDialog progress, String url, JSONArray params, String callbackMethodName) {
+        execute(caller, progress, url, AQuery.METHOD_PUT, params, callbackMethodName);
+    }
+
+    public void doPost(Activity caller, ProgressDialog progress, String url, JSONArray params, String callbackMethodName) {
         execute(caller, progress, url, AQuery.METHOD_POST, params, callbackMethodName);
     }
 
-    private void execute(Activity caller, ProgressDialog progress, String url, int method, Map<String, Object> params, String callbackMethodName) {
+    private void execute(Activity caller, ProgressDialog progress, String url, int method, JSONArray json, String callbackMethodName) {
         aq = new AQuery(caller);
 
         aq.progress(progress);
 
-        if (method == AQuery.METHOD_POST) {
-            aq.ajax(url, params, String.class, caller, callbackMethodName);
+        if (method == AQuery.METHOD_POST || method == AQuery.METHOD_PUT) {
+            Map<String, Object> params = new HashMap<>();
+
+            params.put(AQuery.POST_ENTITY, json);
+
+            aq.ajax(url, params, JSONArray.class, caller, callbackMethodName);
         } else {
-            aq.ajax(url, String.class, caller, callbackMethodName);
+            aq.ajax(url, JSONArray.class, caller, callbackMethodName);
         }
     }
 }

@@ -24,10 +24,11 @@ import java.util.List;
 
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.SocketTest;
+import fr.unice.mbds.maslow.service.MeteorService;
 import fr.unice.mbds.maslow.view.adapter.MainItemAdapter;
 import im.delight.android.ddp.MeteorSingleton;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     //AppCompatActivity
 
     private GridView gridViewListeBoutons;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity  {
     public static final String TAG = "NfcDemo";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public MeteorSingleton mMeteor;
-    SocketTest socketTest=new SocketTest();
+    SocketTest socketTest = new SocketTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +56,14 @@ public class MainActivity extends AppCompatActivity  {
         listeBoutons.add(ListeDiffuseurOdeursActivity.class);
 
 
-
+        MeteorService.getInstance().init(this);
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
 
-         mMeteor=socketTest.meteorCallback(this);
+       // mMeteor = socketTest.meteorCallback(this);
 
 
-         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter != null && nfcAdapter.isEnabled()) {
             Toast.makeText(this, "NFC AVAILABLE", Toast.LENGTH_LONG).show();
         } else {
@@ -70,20 +71,19 @@ public class MainActivity extends AppCompatActivity  {
         }
 
 
-
     }
-
 
 
     @Override
     public void onNewIntent(Intent intent) {
         // onResume gets called after this to handle the intent
-       // setIntent(intent);
+        // setIntent(intent);
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            Toast.makeText(this, "New Intent", Toast.LENGTH_LONG).show();}
+            Toast.makeText(this, "New Intent", Toast.LENGTH_LONG).show();
+        }
 
         handleIntent(intent);
         super.onNewIntent(intent);
@@ -93,12 +93,12 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public void onResume() {
         System.out.print("test");
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,getClass()).
-                        addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        IntentFilter[] intentFilter= new IntentFilter[]{};
-       // adaptor.enableForegroundDispatch(this, pendingIntent, intentFilter, techListsArray);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        IntentFilter[] intentFilter = new IntentFilter[]{};
+        // adaptor.enableForegroundDispatch(this, pendingIntent, intentFilter, techListsArray);
         setupForegroundDispatch(this, nfcAdapter);
         System.out.print("test1");
         super.onResume();
@@ -109,8 +109,6 @@ public class MainActivity extends AppCompatActivity  {
         }*/
         handleIntent(getIntent());
     }
-
-
 
 
     public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
@@ -149,7 +147,7 @@ public class MainActivity extends AppCompatActivity  {
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 new NdefReaderTask().execute(tag);
                 System.out.print("right mime type: ");
-               // Log.d(TAG, "right mime type: " + type);
+                // Log.d(TAG, "right mime type: " + type);
 
             } else {
                 System.out.print("wrong mime type: ");
@@ -175,7 +173,6 @@ public class MainActivity extends AppCompatActivity  {
      * Background task for reading the data. Do not block the UI thread while reading.
      *
      * @author Ralf Wondratschek
-     *
      */
     private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
 
@@ -219,7 +216,7 @@ public class MainActivity extends AppCompatActivity  {
             byte[] payload = record.getPayload();
 
             // Get the Text Encoding
-            String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" :"UTF-8";
+            String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-8";
 
             // Get the Language Code
             int languageCodeLength = payload[0] & 0063;
@@ -228,7 +225,7 @@ public class MainActivity extends AppCompatActivity  {
             // e.g. "en"
 
             // Get the Text
-            System.out.println("le text est:" +new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding));
+            System.out.println("le text est:" + new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding));
             return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
         }
 
@@ -236,9 +233,9 @@ public class MainActivity extends AppCompatActivity  {
         protected void onPostExecute(String result) {
             if (result != null) {
 
-               // mTextView.setText("Read content: " + result);
+                // mTextView.setText("Read content: " + result);
                 System.out.print(result);
-               // Log.d(TAG, "Wrong mime type: " + result);
+                // Log.d(TAG, "Wrong mime type: " + result);
             }
         }
     }
