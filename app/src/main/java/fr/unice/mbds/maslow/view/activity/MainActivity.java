@@ -2,6 +2,7 @@ package fr.unice.mbds.maslow.view.activity;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
@@ -11,11 +12,15 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -24,7 +29,10 @@ import java.util.List;
 
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.SocketTest;
-import fr.unice.mbds.maslow.service.MeteorService;
+import fr.unice.mbds.maslow.entities.Appareil;
+import fr.unice.mbds.maslow.entities.Watchlist;
+import fr.unice.mbds.maslow.util.ApiCallService;
+import fr.unice.mbds.maslow.util.ApiUrlService;
 import fr.unice.mbds.maslow.view.adapter.MainItemAdapter;
 import im.delight.android.ddp.MeteorSingleton;
 
@@ -56,21 +64,75 @@ public class MainActivity extends AppCompatActivity {
         listeBoutons.add(ListeDiffuseurOdeursActivity.class);
 
 
-        MeteorService.getInstance().init(this);
+//        MeteorService.getInstance().setCallbackClass(this);
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
 
-       // mMeteor = socketTest.meteorCallback(this);
+        // mMeteor = socketTest.meteorCallback(this);
 
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (nfcAdapter != null && nfcAdapter.isEnabled()) {
-            Toast.makeText(this, "NFC AVAILABLE", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "NFC NOT AVAILABLE", Toast.LENGTH_LONG).show();
+//        if (nfcAdapter != null && nfcAdapter.isEnabled()) {
+//            Toast.makeText(this, "NFC AVAILABLE", Toast.LENGTH_LONG).show();
+//        } else {
+//            Toast.makeText(this, "NFC NOT AVAILABLE", Toast.LENGTH_LONG).show();
+//        }
+
+        Watchlist w = new Watchlist();
+        ArrayList<Appareil> apps = new ArrayList<>();
+        Appareil a1 = new Appareil();
+        Appareil a2 = new Appareil();
+        Appareil a3 = new Appareil();
+
+        a1.setId("1");
+        a2.setId("2");
+        a3.setId("3");
+
+        apps.add(a1);
+        apps.add(a2);
+        apps.add(a3);
+        w.setAppareils(apps);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
+
+        ResponseEntity result = null;
+        try {
+            result = ApiCallService.getInstance().execute(ApiUrlService.getWatchlistUrl(5), HttpMethod.POST, w, Watchlist.class);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        Watchlist watchlist = (Watchlist) result.getBody();
+        Toast.makeText(this, watchlist.toJson().toString(), Toast.LENGTH_LONG).show();
+    }
 
+    private class AsyncGetWatchlist extends AsyncTask<String, AppCompatActivity, ResponseEntity> {
+        @Override
+        protected ResponseEntity doInBackground(String... params) {
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(AppCompatActivity... values) {
+            super.onProgressUpdate(values);
+
+            ProgressDialog progressDialog = new ProgressDialog(values[1]);
+
+            progressDialog.setMessage("Patientez...");
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(ResponseEntity responseEntity) {
+            super.onPostExecute(responseEntity);
+        }
     }
 
 
@@ -239,4 +301,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

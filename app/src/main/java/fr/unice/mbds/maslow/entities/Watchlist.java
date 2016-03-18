@@ -2,28 +2,39 @@ package fr.unice.mbds.maslow.entities;
 
 import android.util.Log;
 
-import org.json.JSONArray;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
  * Created by Gael on 14/03/2016.
  */
-public class Watchlist {
-    int id;
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.)
+public class Watchlist implements IEntity{
 
-    List<Appareil> appareils;
+
+    private String id;
+
+    private List<Appareil> appareils;
 
     public Watchlist() {
+        appareils = new ArrayList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,26 +47,38 @@ public class Watchlist {
     }
 
     public JSONObject toJson() {
-        JSONObject watchlistJson = new JSONObject();
+        ObjectMapper mapper = new ObjectMapper();
 
         try {
-
-            if (id > 0) {
-                watchlistJson.put("id", id);
-            }
-
-            JSONArray appareilsJson = new JSONArray();
-
-            for (int i = 0; i <= appareilsJson.length(); i++) {
-                appareilsJson.put(((Appareil) appareilsJson.get(i)).toJson());
-            }
-
-            watchlistJson.put("appareils", appareilsJson);
-
-        } catch (JSONException e) {
-            Log.e("Watchlist-Conversion", "Erreur de sérialisation", e);
+            return new JSONObject(mapper.writeValueAsString(this));
+        } catch (JSONException | JsonProcessingException e) {
+            Log.e("Serialisation", e.getMessage());
+            return null;
         }
 
-        return watchlistJson;
+//
+//        JSONObject watchlistJson = new JSONObject();
+//
+//        try {
+//
+//            if (id > 0) {
+//                watchlistJson.put("id", id);
+//            }
+//
+//            JSONArray appareilsJson = new JSONArray();
+//
+//            if (!appareils.isEmpty()) {
+//                for (Appareil a : appareils) {
+//                    appareilsJson.put(a.toJson());
+//                }
+//            }
+//
+//            watchlistJson.put("appareils", appareilsJson);
+//
+//        } catch (JSONException e) {
+//            Log.e("Watchlist-Conversion", "Erreur de sérialisation", e);
+//        }
+//
+//        return watchlistJson;
     }
 }

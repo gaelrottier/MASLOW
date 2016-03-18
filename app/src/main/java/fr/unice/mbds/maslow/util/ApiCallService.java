@@ -1,22 +1,21 @@
 package fr.unice.mbds.maslow.util;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
-import com.androidquery.AQuery;
-
-import org.json.JSONArray;
-
-import java.util.HashMap;
-import java.util.Map;
+import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
  * Created by Nicolas on 09/12/2015.
  */
-public class ApiCallService {
+public class ApiCallService<T extends IEntity> {
 
     private static ApiCallService instance = null;
-    private AQuery aq;
 
     public static ApiCallService getInstance() {
         if (instance == null) {
@@ -30,35 +29,25 @@ public class ApiCallService {
         return instance;
     }
 
-    public void doGet(Activity caller, ProgressDialog progress, String url, String callbackMethodName) {
-        execute(caller, progress, url, AQuery.METHOD_GET, null, callbackMethodName);
-    }
+    public ResponseEntity execute(String url, HttpMethod methode, T entity, Class<T> typeRetour) throws Exception {
 
-    public void doDelete(Activity caller, ProgressDialog progress, String url, String callbackMethodName) {
-        execute(caller, progress, url, AQuery.METHOD_DELETE, null, callbackMethodName);
-    }
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-    public void doPut(Activity caller, ProgressDialog progress, String url, JSONArray params, String callbackMethodName) {
-        execute(caller, progress, url, AQuery.METHOD_PUT, params, callbackMethodName);
-    }
+        HttpEntity<String> httpEntity = null;
 
-    public void doPost(Activity caller, ProgressDialog progress, String url, JSONArray params, String callbackMethodName) {
-        execute(caller, progress, url, AQuery.METHOD_POST, params, callbackMethodName);
-    }
+        if (entity != null) {
+            httpEntity = new HttpEntity<>(entity.toJson().toString(), httpHeaders);
+        }
 
-    private void execute(Activity caller, ProgressDialog progress, String url, int method, JSONArray json, String callbackMethodName) {
-        aq = new AQuery(caller);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-        aq.progress(progress);
-
-        if (method == AQuery.METHOD_POST || method == AQuery.METHOD_PUT) {
-            Map<String, Object> params = new HashMap<>();
-
-            params.put(AQuery.POST_ENTITY, json);
-
-            aq.ajax(url, params, JSONArray.class, caller, callbackMethodName);
-        } else {
-            aq.ajax(url, JSONArray.class, caller, callbackMethodName);
+        try {
+            return restTemplate.exchange(url, methode, httpEntity, typeRetour);
+        } catch (Exception e) {
+            throw e;
         }
     }
+
 }

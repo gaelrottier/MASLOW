@@ -1,6 +1,5 @@
 package fr.unice.mbds.maslow.service;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,13 +37,14 @@ public class MeteorService implements MeteorCallback {
         return instance;
     }
 
-    public void init(final Context context) {
-        meteor = new Meteor(context, ApiUrlService.WEBSOCKET_BASE_URL);
-        meteor.addCallback(this);
-        meteor.connect();
+    public Meteor getMeteorInstance() {
+        return meteor;
     }
 
     public void setCallbackClass(ICallback callbackClass) {
+        meteor = new Meteor(callbackClass.getContext(), ApiUrlService.WEBSOCKET_BASE_URL);
+        meteor.addCallback(this);
+        meteor.connect();
         this.callbackClass = callbackClass;
     }
 
@@ -63,7 +63,7 @@ public class MeteorService implements MeteorCallback {
             @Override
             public void onError(String s, String s1, String s2) {
                 Log.e("Websocket-Connexion", s1);
-                Toast.makeText((Context) callbackClass, "Connexion au websocket échouée", Toast.LENGTH_LONG).show();
+                Toast.makeText(callbackClass.getContext(), "Connexion au websocket échouée", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -81,29 +81,32 @@ public class MeteorService implements MeteorCallback {
     @Override
     public void onDataAdded(String collectionName, String documentID, String newValueJson) {
         if (callbackClass != null) {
-//            if (checkId(documentID))
-                callbackClass.onDataAdded(collectionName, documentID, newValueJson);
+            Appareil appareilConcerne = checkId(documentID);
+            if (appareilConcerne != null)
+                callbackClass.onDataAdded(collectionName, documentID, newValueJson, appareilConcerne);
         }
     }
 
     @Override
     public void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson) {
         if (callbackClass != null) {
-//            if (checkId(documentID))
-                callbackClass.onDataChanged(collectionName, documentID, updateValuesJson, removedValuesJson);
+            Appareil appareilConcerne = checkId(documentID);
+            if (appareilConcerne != null)
+                callbackClass.onDataChanged(collectionName, documentID, updateValuesJson, removedValuesJson, appareilConcerne);
         }
     }
 
     @Override
     public void onDataRemoved(String collectionName, String documentID) {
         if (callbackClass != null) {
-//            if (checkId(documentID))
-                callbackClass.onDataRemoved(collectionName, documentID);
+            Appareil appareilConcerne = checkId(documentID);
+            if (appareilConcerne != null)
+                callbackClass.onDataRemoved(collectionName, documentID, appareilConcerne);
         }
     }
 
-    private boolean checkId(String documentID) {
-        boolean response = false;
+    private Appareil checkId(String documentID) {
+        Appareil response = null;
 
         List<Appareil> appareils = callbackClass.getWatchlist().getAppareils();
 
@@ -111,7 +114,7 @@ public class MeteorService implements MeteorCallback {
         for (Appareil a : appareils) {
             for (Evenement e : a.getEvenements()) {
                 if (e.getIdOrchestra() == documentID) {
-                    response = true;
+                    response = a;
                     break appareilsLoop;
                 }
             }

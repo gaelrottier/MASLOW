@@ -2,27 +2,34 @@ package fr.unice.mbds.maslow.entities;
 
 import android.util.Log;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
  * Created by Gael on 14/03/2016.
  */
-public class Evenement {
-    int id;
+@JsonIgnoreProperties(ignoreUnknown=true)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class Evenement implements IEntity{
 
-    String idOrchestra;
+    private String id;
 
-    String alias;
+    private String idOrchestra;
+
+//    {"nom":"on","nomOrchestra":"switchOn"}
+    private String alias;
 
     public Evenement() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,7 +54,7 @@ public class Evenement {
 
         try {
 
-            if (id > 0) {
+            if (id != null) {
                 watchlistJson.put("id", id);
             }
 

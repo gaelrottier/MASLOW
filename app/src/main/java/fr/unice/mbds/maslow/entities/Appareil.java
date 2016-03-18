@@ -2,23 +2,31 @@ package fr.unice.mbds.maslow.entities;
 
 import android.util.Log;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
  * Created by Gael on 14/03/2016.
  */
-public class Appareil {
-    int id;
+@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class Appareil implements IEntity{
 
-    String nom;
+    private String id;
+
+    private String nom;
 
     private List<Evenement> evenements;
 
     public Appareil() {
+        evenements = new ArrayList<>();
     }
 
     public List<Evenement> getEvenements() {
@@ -29,11 +37,11 @@ public class Appareil {
         this.evenements = evenements;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,7 +58,7 @@ public class Appareil {
 
         try {
 
-            if (id > 0) {
+            if (id != null) {
                 watchlistJson.put("id", id);
             }
 
@@ -58,8 +66,10 @@ public class Appareil {
 
             JSONArray evenementsJson = new JSONArray();
 
-            for (int i = 0; i <= evenementsJson.length(); i++) {
-                evenementsJson.put(((Evenement) evenementsJson.get(i)).toJson());
+            if (!evenements.isEmpty()) {
+                for (Evenement e : evenements) {
+                    evenementsJson.put(e.toJson());
+                }
             }
 
             watchlistJson.put("evenements", evenementsJson);
