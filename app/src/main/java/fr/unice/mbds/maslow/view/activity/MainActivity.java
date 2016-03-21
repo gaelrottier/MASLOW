@@ -18,9 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashMap;
 
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.SocketTest;
@@ -48,19 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         gridViewListeBoutons = (GridView) findViewById(R.id.activity_main_grid_view);
 
-        List<Class<? extends AppCompatActivity>> listeBoutons = new ArrayList<>();
-        listeBoutons.add(PlayListsActivity.class);
-        listeBoutons.add(ListeConsoEnergieActivity.class);
-        listeBoutons.add(ListeLumieresActivity.class);
-        listeBoutons.add(ListeDiffuseurOdeursActivity.class);
+        LinkedHashMap<Class<? extends AppCompatActivity>, Integer> listeBoutons = new LinkedHashMap<>();
 
+        listeBoutons.put(PlayListsActivity.class, R.drawable.fff);
+        listeBoutons.put(ListeConsoEnergieActivity.class, R.drawable.fff);
+        listeBoutons.put(ListeLumieresActivity.class, R.drawable.fff);
+        listeBoutons.put(ListeDiffuseurOdeursActivity.class, R.drawable.fff);
 
-//        MeteorService.getInstance().setCallbackClass(this);
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
-
-        // mMeteor = socketTest.meteorCallback(this);
-
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }

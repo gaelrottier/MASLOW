@@ -9,12 +9,14 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.entities.Appareil;
+import fr.unice.mbds.maslow.entities.Evenement;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.interfaces.ICallback;
 
@@ -23,23 +25,14 @@ import fr.unice.mbds.maslow.interfaces.ICallback;
  */
 public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
-    private final Watchlist watchlist;
     private Context context;
     private Map<Appareil, TextView> element;
+    private final Watchlist watchlist;
 
     public ConsoEnergieItemAdapter(Context context, Watchlist watchlist) {
         this.context = context;
         this.watchlist = watchlist;
     }
-//
-//    public ConsoEnergieItemAdapter(Context context, Map<String, String> appareils) {
-//        this.context = context;
-//
-//        for (Map.Entry<String, String> entry : appareils.entrySet()) {
-//            nomAppareils.add(entry.getKey());
-//            consoEnergie.add(entry.getValue());
-//        }
-//    }
 
     @Override
     public int getCount() {
@@ -63,10 +56,11 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
         }
 
         AQuery aq = new AQuery(convertView);
+        Appareil appareil = watchlist.getAppareils().get(position);
 
-        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_appareil)).text(watchlist.getAppareils().get(position).getNom());
+        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_appareil)).text(appareil.getNom());
         aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text("0 W");
-        element.put(watchlist.getAppareils().get(position), aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).getTextView());
+        element.put(appareil, aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).getTextView());
 //        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text
 
         return convertView;
@@ -74,15 +68,18 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     @Override
     public void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil) {
-//        /*pour chaque appareil de la watchlist
-//          pour chaque evenement
-//              si idOrchestra = documentID*/
 
+        for (Evenement e : appareil.getEvenements()) {
+            if (e.getIdOrchestra().equals(documentID)) {
+                TextView txtConso = element.get(appareil);
 
-//                  TextView txtconso = element.get(appareil)
-//                  JsonObject newValue = new jsonobject(newValueJson)
-//                  txtConso.setText(newValue.getString("conso"))
-//
+                try {
+                    txtConso.setText(newValueJson.getString(e.getAlias().get("nom")) + " W");
+                } catch (JSONException e1) {
+                    Log.e("json parsing", e1.getMessage());
+                }
+            }
+        }
         Log.w("data added", "collectionName :" + collectionName + "; documentID : " + documentID + "; newValueJson : " + newValueJson);
     }
 
