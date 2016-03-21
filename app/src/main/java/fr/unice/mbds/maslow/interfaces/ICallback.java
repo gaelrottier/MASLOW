@@ -2,6 +2,8 @@ package fr.unice.mbds.maslow.interfaces;
 
 import android.content.Context;
 
+import org.json.JSONObject;
+
 import fr.unice.mbds.maslow.entities.Appareil;
 import fr.unice.mbds.maslow.entities.Watchlist;
 
@@ -10,7 +12,7 @@ import fr.unice.mbds.maslow.entities.Watchlist;
  */
 public interface ICallback {
 
-    void onDataAdded(String collectionName, String documentID, String newValueJson, Appareil appareil);
+    void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil);
 
     void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson, Appareil appareil);
 

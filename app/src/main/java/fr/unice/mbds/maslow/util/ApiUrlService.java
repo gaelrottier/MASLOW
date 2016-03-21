@@ -11,7 +11,7 @@ public class ApiUrlService {
     public static String WEBSOCKET_USERNAME = "mbds-maslow@harmolabs.com";
     public static String WEBSOCKET_PASSWORD = "maslowmaslow";
 
-    public static String SERVER_BASE_URL = "http://192.168.0.170:8080/";
+    public static String SERVER_BASE_URL = "http://192.168.0.126:8080/";
 
     public static String UTILISATEUR_URL = SERVER_BASE_URL + "u/";
 

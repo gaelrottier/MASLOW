@@ -6,21 +6,22 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
  * Created by Gael on 14/03/2016.
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
-//@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Evenement implements IEntity{
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Evenement implements IEntity {
 
     private String id;
 
     private String idOrchestra;
 
-//    {"nom":"on","nomOrchestra":"switchOn"}
-    private String alias;
+    //    {"nom":"on","nomOrchestra":"switchOn"}
+    private Map<String, String> alias;
 
     public Evenement() {
     }
@@ -41,11 +42,11 @@ public class Evenement implements IEntity{
         this.idOrchestra = idOrchestra;
     }
 
-    public String getAlias() {
+    public Map<String, String> getAlias() {
         return alias;
     }
 
-    public void setAlias(String alias) {
+    public void setAlias(Map<String, String> alias) {
         this.alias = alias;
     }
 

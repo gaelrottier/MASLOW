@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
-import java.util.List;
+import org.json.JSONObject;
+
 import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
@@ -24,13 +25,11 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     private final Watchlist watchlist;
     private Context context;
-    List<Appareil> appareils;
-    Map<Appareil, TextView> element;
+    private Map<Appareil, TextView> element;
 
     public ConsoEnergieItemAdapter(Context context, Watchlist watchlist) {
         this.context = context;
         this.watchlist = watchlist;
-        this.appareils = watchlist.getAppareils();
     }
 //
 //    public ConsoEnergieItemAdapter(Context context, Map<String, String> appareils) {
@@ -44,12 +43,12 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     @Override
     public int getCount() {
-        return appareils.size();
+        return watchlist.getAppareils().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return appareils.get(position);
+        return watchlist.getAppareils().get(position);
     }
 
     @Override
@@ -65,16 +64,16 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
         AQuery aq = new AQuery(convertView);
 
-        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_appareil)).text(appareils.get(position).getNom());
+        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_appareil)).text(watchlist.getAppareils().get(position).getNom());
         aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text("0 W");
-        element.put(appareils.get(position), aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).getTextView());
+        element.put(watchlist.getAppareils().get(position), aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).getTextView());
 //        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text
 
         return convertView;
     }
 
     @Override
-    public void onDataAdded(String collectionName, String documentID, String newValueJson, Appareil appareil) {
+    public void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil) {
 //        /*pour chaque appareil de la watchlist
 //          pour chaque evenement
 //              si idOrchestra = documentID*/

@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
-import fr.unice.mbds.maslow.view.adapter.LumieresItemAdapter;
+import fr.unice.mbds.maslow.view.adapter.DiffuseurOdeursItemAdapter;
 
 public class ListeDiffuseurOdeursActivity extends AppCompatActivity {
 
     ListView listeDiffuseurs;
-    LumieresItemAdapter adapter;
+    DiffuseurOdeursItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ListeDiffuseurOdeursActivity extends AppCompatActivity {
         diffuseurs.put("Salon", "true");
         diffuseurs.put("Salle de bain", "false");
 
-        adapter = new LumieresItemAdapter(getApplicationContext(), diffuseurs);
+        adapter = new DiffuseurOdeursItemAdapter(getApplicationContext(), diffuseurs);
         listeDiffuseurs.setAdapter(adapter);
     }
 }
