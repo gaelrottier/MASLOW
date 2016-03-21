@@ -81,7 +81,7 @@
 //            httpPost.setHeader("Content-type", "application/json");
 //
 //            // 8. Execute POST request to the given URL
-//            HttpResponse httpResponse = httpclient.execute(httpPost);
+//            HttpResponse httpResponse = httpclient.executeForJson(httpPost);
 //
 //            // 9. receive response as inputStream
 //            inputStream = httpResponse.getEntity().getContent();
@@ -110,7 +110,7 @@
 //                    Toast.makeText(getBaseContext(), "Enter some data!", Toast.LENGTH_LONG).show();
 //                    // call AsynTask to perform network operation on separate thread
 //                }
-//                new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+//                new HttpAsyncTask().executeForJson("http://hmkcode.appspot.com/jsonservlet");
 //                System.out.println("success");
 //                break;
 //        }

@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private GridView gridViewListeBoutons;
     private MainItemAdapter adaptor;
-    TextView textView;
-    NfcAdapter nfcAdapter;
+    private TextView textView;
+    private NfcAdapter nfcAdapter;
     public static final String TAG = "NfcDemo";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public MeteorSingleton mMeteor;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         LinkedHashMap<Class<? extends AppCompatActivity>, Integer> listeBoutons = new LinkedHashMap<>();
 
         listeBoutons.put(PlayListsActivity.class, R.drawable.fff);
-        listeBoutons.put(ListeConsoEnergieActivity.class, R.drawable.fff);
+        listeBoutons.put(ListeConsoEnergieActivity.class, R.color.colorBtnPlaylist);
         listeBoutons.put(ListeLumieresActivity.class, R.drawable.fff);
         listeBoutons.put(ListeDiffuseurOdeursActivity.class, R.drawable.fff);
 

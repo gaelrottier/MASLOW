@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.entities.Utilisateur;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
@@ -53,12 +54,14 @@ public class ListeLumieresActivity extends AppCompatActivity {
             ResponseEntity<Watchlist> result = null;
 
             try {
-                result = ApiCallService.getInstance().execute(ApiUrlService.getWatchlistUrl(params[0]), HttpMethod.GET, null, Watchlist.class);
+                String url = ApiUrlService.addToken(ApiUrlService.getWatchlistUrl(params[0]), Utilisateur.getToken(ListeLumieresActivity.this));
+
+                result = ApiCallService.getInstance().executeForEntity(url, HttpMethod.GET, null, Watchlist.class);
             } catch (Exception e) {
                 Log.e("GET REST", e.getMessage());
             }
 
-            return result.getBody();
+            return result.getBody() == null ? null : result.getBody();
         }
 
         @Override

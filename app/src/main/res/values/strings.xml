@@ -2,4 +2,11 @@
     <string name="app_name">MASLOW</string>
     <string name="title_activity_socket_test">SocketTest</string>
     <string name="title_activity_send_json_data">sendJsonData</string>
+    <string name="title_activity_login">Connexion</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Identifiant</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Connexion</string>
+    <string name="action_sign_in_short">Connexion</string>
 </resources>

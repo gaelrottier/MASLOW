@@ -1,5 +1,6 @@
 package fr.unice.mbds.maslow.util;
 
+import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,15 +30,14 @@ public class ApiCallService<T extends IEntity> {
         return instance;
     }
 
-    public ResponseEntity execute(String url, HttpMethod methode, T entity, Class<T> typeRetour) throws Exception {
-
+    public ResponseEntity executeForJson(String url, HttpMethod methode, JSONObject entity, Class<T> typeRetour) throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> httpEntity = null;
 
         if (entity != null) {
-            httpEntity = new HttpEntity<>(entity.toJson().toString(), httpHeaders);
+            httpEntity = new HttpEntity<>(entity.toString(), httpHeaders);
         }
 
         RestTemplate restTemplate = new RestTemplate();
@@ -47,6 +47,14 @@ public class ApiCallService<T extends IEntity> {
             return restTemplate.exchange(url, methode, httpEntity, typeRetour);
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    public ResponseEntity executeForEntity(String url, HttpMethod methode, T entity, Class<T> typeRetour) throws Exception {
+        if (entity != null) {
+            return executeForJson(url, methode, entity.toJson(), typeRetour);
+        } else {
+            return executeForJson(url, methode, null, typeRetour);
         }
     }
 
