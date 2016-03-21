@@ -14,7 +14,7 @@ public interface ICallback {
 
     void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil);
 
-    void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson, Appareil appareil);
+    void onDataChanged(String collectionName, String documentID, JSONObject updateValuesJson, String removedValuesJson, Appareil appareil);
 
     void onDataRemoved(String collectionName, String documentID, Appareil appareil);
 

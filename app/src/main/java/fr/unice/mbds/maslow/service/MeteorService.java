@@ -108,10 +108,11 @@ public class MeteorService implements MeteorCallback {
 
     @Override
     public void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson) {
+        Log.w("onDataChanged", "collectionName = [" + collectionName + "], documentID = [" + documentID + "], updateValuesJson = [" + updateValuesJson + "], removedValuesJson = [" + removedValuesJson + "]");
         if (callbackClass != null) {
             Appareil appareilConcerne = checkId(documentID);
             if (appareilConcerne != null)
-                callbackClass.onDataChanged(collectionName, documentID, updateValuesJson, removedValuesJson, appareilConcerne);
+                callbackClass.onDataChanged(collectionName, documentID, getParameters(updateValuesJson), removedValuesJson, appareilConcerne);
         }
     }
 

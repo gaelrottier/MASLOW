@@ -10,6 +10,7 @@ import android.widget.Switch;
 
 import com.androidquery.AQuery;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -79,10 +80,12 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
                 for (Evenement e : watchlist.getAppareils().get(position).getEvenements()) {
 
-                    if (e.getAlias().get("nom").equals("on")) {
-                        onId = e.getIdOrchestra();
-                    } else if (e.getAlias().get("nom").equals("off")) {
-                        offId = e.getIdOrchestra();
+                    if (e.getAlias().get("parameterKey") == null) {
+                        if (e.getAlias().get("nom").equals("on")) {
+                            onId = e.getIdOrchestra();
+                        } else if (e.getAlias().get("nom").equals("off")) {
+                            offId = e.getIdOrchestra();
+                        }
                     }
                 }
 
@@ -91,6 +94,7 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
                 } else {
                     MeteorService.getInstance().sendCommand(offId);
                 }
+
             }
         });
 
@@ -101,28 +105,53 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
     @Override
     public void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil) {
+        updateValues(documentID, appareil, null);
+    }
 
+    private void updateValues(String documentID, Appareil appareil, JSONObject parameters) {
         for (Evenement e : appareil.getEvenements()) {
             if (e.getIdOrchestra().equals(documentID)) {
                 Switch s = switchsAppareils.get(appareil);
 
                 String nom = e.getAlias().get("nom");
+                String parameterKey = e.getAlias().get("parameterKey");
 
-                if ("on".equals(nom)) {
-                    s.setChecked(true);
-                    break;
-                } else if ("off".equals(nom)) {
-                    s.setChecked(false);
-                    break;
+                if (parameterKey == null) {
+                    if ("on".equals(nom)) {
+                        s.setChecked(true);
+                        break;
+                    } else if ("off".equals(nom)) {
+                        s.setChecked(false);
+                        break;
+                    }
+                } else if (parameters != null) {
+
+                    String value = "";
+
+                    try {
+                        value = parameters.getString(parameterKey);
+                    } catch (JSONException e1) {
+                        Log.e("json parsing", e1.getMessage());
+                    }
+
+                    if (e.getAlias().get("valeur").equals(value)) {
+                        if ("on".equals(nom)) {
+                            s.setChecked(true);
+                            break;
+                        } else if ("off".equals(nom)) {
+                            s.setChecked(false);
+                            break;
+                        }
+                    }
+
                 }
-
             }
         }
-
     }
 
     @Override
-    public void onDataChanged(String collectionName, String documentID, String updateValuesJson, String removedValuesJson, Appareil appareil) {
+    public void onDataChanged(String collectionName, String documentID, JSONObject updateValuesJson, String removedValuesJson, Appareil appareil) {
+        updateValues(documentID, appareil, updateValuesJson);
         Log.w("onDataChanged", "collectionName = [" + collectionName + "], documentID = [" + documentID + "], updateValuesJson = [" + updateValuesJson + "], removedValuesJson = [" + removedValuesJson + "], appareil = [" + appareil + "]");
     }
 

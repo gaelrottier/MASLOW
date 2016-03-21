@@ -69,8 +69,10 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
 
             progress.hide();
 
-            adapter = new ConsoEnergieItemAdapter(getApplicationContext(), watchlist);
-            listeConso.setAdapter(adapter);
+            if (watchlist != null) {
+                adapter = new ConsoEnergieItemAdapter(getApplicationContext(), watchlist);
+                listeConso.setAdapter(adapter);
+            }
         }
     }
 
