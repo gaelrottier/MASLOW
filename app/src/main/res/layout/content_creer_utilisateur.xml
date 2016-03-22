@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="fr.unice.mbds.maslow.view.activity.CreerUtilisateurActivity"
+    tools:showIn="@layout/activity_creer_utilisateur">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="NEW UTILISATEUR"
+        android:id="@+id/textViewNewUtilisateur"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Nom"
+        android:ems="10"
+        android:id="@+id/editTextNewNomUtilisateur"
+        android:layout_below="@+id/textViewNewUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Prenom"
+        android:ems="10"
+        android:id="@+id/editTextNewPrenomUtilisateur"
+        android:layout_below="@+id/editTextNewNomUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Identiffiant"
+        android:ems="10"
+        android:id="@+id/editTextNewIdentifiantUtilisateur"
+        android:layout_below="@+id/editTextNewPrenomUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Mot de passe"
+        android:ems="10"
+        android:id="@+id/editTextNewPasswordUtilisateur"
+        android:layout_below="@+id/editTextNewIdentifiantUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Enregistrer"
+        android:id="@+id/buttonEnregUser"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/editTextNewPasswordUtilisateur"
+        android:layout_alignEnd="@+id/editTextNewPasswordUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>
