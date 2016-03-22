@@ -89,10 +89,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("GET REST", e.getMessage());
             }
 
-            Utilisateur utilisateur = (Utilisateur) result.getBody();
+            Utilisateur utilisateur = null;
 
-            if (utilisateur == null) {
-                Toast.makeText(LoginActivity.this, "Identifiants erronés", Toast.LENGTH_LONG);
+            if (result != null) {
+                utilisateur = (Utilisateur) result.getBody();
             }
 
             return utilisateur;
@@ -102,7 +102,9 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(final Utilisateur utilisateur) {
             progress.hide();
 
-            if (utilisateur != null) {
+            if (utilisateur == null) {
+                Toast.makeText(LoginActivity.this, "Identifiants erronés", Toast.LENGTH_LONG).show();
+            } else {
                 SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 

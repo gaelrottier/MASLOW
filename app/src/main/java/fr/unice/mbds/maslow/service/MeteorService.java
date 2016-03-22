@@ -87,6 +87,7 @@ public class MeteorService implements MeteorCallback {
 
     @Override
     public void onDisconnect() {
+        Toast.makeText(callbackClass.getContext(), "Déconnecté du websocket", Toast.LENGTH_LONG).show();
         Log.w("INFO", "Déconnecté du websocket.");
     }
 
