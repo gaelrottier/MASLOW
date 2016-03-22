@@ -9,4 +9,20 @@
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Connexion</string>
+    <string name="txt_activity_new_utilisateur_titre">Créer un utilisateur</string>
+    <string name="txt_activity_new_utilisateur_nom">Nom</string>
+    <string name="txt_activity_new_utilisateur_prenom">Prenom</string>
+    <string name="txt_activity_new_utilisateur_identifiant">Identifiant</string>
+    <string name="txt_activity_new_utilisateur_password">Mot de passe</string>
+    <string name="btn_activity_new_utilisateur_valider">Créer</string>
+    <string name="txt_activity_detail_utilisateur_titre">Détail de l\'utilisateur</string>
+    <string name="txt_activity_detail_utilisateur_nom">Nom : </string>
+    <string name="txt_activity_detail_utilisateur_prenom">Prenom : </string>
+    <string name="txt_activity_detail_utilisateur_identifiant">Identifiant : </string>
+    <string name="txt_activity_modifier_utilisateur_titre">Mise à jour de l\'utilisateur</string>
+    <string name="txt_activity_modifier_utilisateur_nom">Nom</string>
+    <string name="txt_activity_modifier_utilisateur_prenom">Prenom</string>
+    <string name="txt_activity_modifier_utilisateur_identifiant">Identifiant</string>
+    <string name="txt_activity_modifier_utilisateur_password">Mot de passe</string>
+    <string name="btn_activity_modifier_utilisateur_password_valider">Valider la modification</string>
 </resources>

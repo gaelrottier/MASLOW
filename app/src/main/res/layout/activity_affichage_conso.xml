@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:paddingTop="15dp"
     tools:context="fr.unice.mbds.maslow.view.activity.AffichageConsoActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -15,7 +15,36 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_affichage_conso" />
+    <TextView
+        android:id="@+id/textViewInfoConso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="INFO CONSOMMATION"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/textViewNomAppareil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/textViewConsoAppareil"
+        android:text="Nom Appareil"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewConsoAppareil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/textViewInfoConso"
+        android:text="Conso Appareil"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+</RelativeLayout>

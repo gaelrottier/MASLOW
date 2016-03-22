@@ -18,9 +18,9 @@
         android:layout_height="match_parent"
         android:textSize="20sp"
         android:layout_gravity="right"
-        android:gravity="right"
+        android:gravity="end"
         android:padding="20dp"
         android:textColor="@android:color/black"
-        android:text="50%"/>
+        android:text="50 W" />
 
 </LinearLayout>

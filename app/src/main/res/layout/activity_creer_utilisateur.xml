@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:fitsSystemWindows="true"
     tools:context="fr.unice.mbds.maslow.view.activity.CreerUtilisateurActivity">
 
@@ -15,7 +15,68 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_creer_utilisateur" />
+    <TextView
+        android:id="@+id/textViewNewUtilisateur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txt_activity_new_utilisateur_titre"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <EditText
+        android:id="@+id/editTextNewNomUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewNewUtilisateur"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/txt_activity_new_utilisateur_nom" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <EditText
+        android:id="@+id/editTextNewPrenomUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextNewNomUtilisateur"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/txt_activity_new_utilisateur_prenom" />
+
+    <EditText
+        android:id="@+id/editTextNewIdentifiantUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextNewPrenomUtilisateur"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/txt_activity_new_utilisateur_identifiant" />
+
+    <EditText
+        android:id="@+id/editTextNewPasswordUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextNewIdentifiantUtilisateur"
+        android:ems="10"
+        android:text="@string/txt_activity_new_utilisateur_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonEnregUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextNewPasswordUtilisateur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextNewPasswordUtilisateur"
+        android:layout_centerVertical="true"
+        android:text="@string/btn_activity_new_utilisateur_valider" />
+
+</RelativeLayout>

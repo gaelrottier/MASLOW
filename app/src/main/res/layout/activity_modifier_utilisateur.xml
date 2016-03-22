@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:paddingTop="15dp"
     tools:context="fr.unice.mbds.maslow.view.activity.ModifierUtilisateurActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -15,7 +15,72 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_modifier_utilisateur" />
+    <TextView
+        android:id="@+id/textViewModifierUtilisateur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txt_activity_modifier_utilisateur_titre"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editTextModifierNomUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textViewModifierUtilisateur"
+        android:ems="10"
+        android:hint="@string/txt_activity_modifier_utilisateur_nom"
+        android:inputType="textPersonName"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextModifierPrenomUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextModifierNomUtilisateur"
+        android:ems="10"
+        android:hint="@string/txt_activity_modifier_utilisateur_prenom"
+        android:inputType="textPersonName"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextModifierIdentifiantUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/editTextModifierPrenomUtilisateur"
+        android:ems="10"
+        android:hint="@string/txt_activity_modifier_utilisateur_identifiant"
+        android:inputType="textPersonName"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextModifierPasswordUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/editTextModifierIdentifiantUtilisateur"
+        android:ems="10"
+        android:hint="@string/txt_activity_modifier_utilisateur_password"
+        android:inputType="textPassword" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/buttonModifierUtilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/editTextModifierPasswordUtilisateur"
+        android:layout_alignRight="@id/editTextModifierPasswordUtilisateur"
+        android:layout_below="@id/editTextModifierPasswordUtilisateur"
+        android:layout_marginTop="56dp"
+        android:text="@string/btn_activity_modifier_utilisateur_password_valider" />
+
+
+</RelativeLayout>
