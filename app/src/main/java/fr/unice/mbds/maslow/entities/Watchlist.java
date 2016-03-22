@@ -18,7 +18,6 @@ import fr.unice.mbds.maslow.interfaces.IEntity;
  * Created by Gael on 14/03/2016.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonInclude(JsonInclude.Include.)
 public class Watchlist implements IEntity{
 
 

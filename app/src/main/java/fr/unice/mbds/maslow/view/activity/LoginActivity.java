@@ -3,7 +3,6 @@ package fr.unice.mbds.maslow.view.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +24,7 @@ import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.entities.Utilisateur;
 import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
+import fr.unice.mbds.maslow.util.UtilisateurManager;
 
 /**
  * A login screen that offers login via email/password.
@@ -43,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
         txtUsername = (AutoCompleteTextView) aq.id(R.id.activity_login_email).getTextView();
         txtPassword = aq.id(R.id.activity_login_password).getEditText();
+
+        ApiUrlService.addToken(ApiUrlService.getProceduralUrl(1, 2), Utilisateur.getToken(this));
+
 
         aq.id(R.id.activity_login_sign_in_button).clicked(new OnClickListener() {
             @Override
@@ -101,21 +104,15 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Utilisateur utilisateur) {
             progress.hide();
+            Context context = LoginActivity.this;
 
             if (utilisateur == null) {
-                Toast.makeText(LoginActivity.this, "Identifiants erronés", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Identifiants erronés", Toast.LENGTH_LONG).show();
             } else {
-                SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString("identifiant", utilisateur.getIdentifiant());
-                editor.putString("token", utilisateur.getToken());
-                editor.putString("nom", utilisateur.getNom());
-                editor.putString("prenom", utilisateur.getNom());
+                UtilisateurManager.saveUtilisateur(context, utilisateur);
 
-                editor.apply();
-
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i = new Intent(context, MainActivity.class);
                 LoginActivity.this.startActivity(i);
             }
         }

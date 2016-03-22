@@ -44,8 +44,8 @@ public class MeteorService implements MeteorCallback {
         return meteor;
     }
 
-    public void sendCommand(String commandId) {
-        meteor.call("sendCommandById", new Object[]{commandId}, new ResultListener() {
+    public void sendCommand(String commandId, JSONObject parameters) {
+        meteor.call("sendCommandById", new Object[]{commandId, parameters}, new ResultListener() {
             @Override
             public void onSuccess(String s) {
                 Log.w("websocket", "Succès");
@@ -56,6 +56,10 @@ public class MeteorService implements MeteorCallback {
                 Log.e("WebSocket", s + ", " + s1 + ", " + s2);
             }
         });
+    }
+
+    public void sendCommand(String commandId) {
+        sendCommand(commandId, null);
     }
 
     public void setCallbackClass(ICallback callbackClass) {

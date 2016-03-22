@@ -20,7 +20,7 @@ public class ApiUrlService {
     private static String APPAREIL_URL = "a/";
     private static String EVENEMENT_URL = "e/";
 
-    public static String PROCEDURAL_URL = SERVER_BASE_URL + "p/";
+    public static String PROCEDURAL_URL = "p/";
     private static String OPERATION_URL = "o/";
 
 
@@ -62,18 +62,18 @@ public class ApiUrlService {
     /**
      * @return http://url:8080/p/idProcedural/
      */
-    public static String getProceduralUrl(int idProcedural) {
-        return PROCEDURAL_URL + idProcedural + "/";
+    public static String getProceduralUrl(int idUtilisateur, int idProcedural) {
+        return UTILISATEUR_URL + idUtilisateur + "/" + PROCEDURAL_URL + idProcedural + "/";
     }
 
     /**
      * @return http://url:8080/p/idProcedural/o/idOperation/
      */
-    public static String getOperationUrl(int idProcedural, int idOperation) {
-        return getProceduralUrl(idProcedural) + OPERATION_URL + "/";
+    public static String getOperationUrl(int idUtilisateur, int idProcedural, int idOperation) {
+        return getProceduralUrl(idUtilisateur, idProcedural) + OPERATION_URL + "/";
     }
 
     public static String addToken(String url, String token) {
-        return url + "?token=" + token;
+        return url + TOKEN_BASE + token;
     }
 }
