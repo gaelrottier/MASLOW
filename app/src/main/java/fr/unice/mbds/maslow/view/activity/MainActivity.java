@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
@@ -22,21 +21,17 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import fr.unice.mbds.maslow.R;
-import fr.unice.mbds.maslow.SocketTest;
 import fr.unice.mbds.maslow.view.adapter.MainItemAdapter;
 import im.delight.android.ddp.MeteorSingleton;
 
 public class MainActivity extends AppCompatActivity {
-    //AppCompatActivity
 
     private GridView gridViewListeBoutons;
     private MainItemAdapter adaptor;
-    private TextView textView;
     private NfcAdapter nfcAdapter;
     public static final String TAG = "NfcDemo";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public MeteorSingleton mMeteor;
-    SocketTest socketTest = new SocketTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+
         gridViewListeBoutons = (GridView) findViewById(R.id.activity_main_grid_view);
 
         LinkedHashMap<Class<? extends AppCompatActivity>, Integer> listeBoutons = new LinkedHashMap<>();
 
-        listeBoutons.put(PlayListsActivity.class, R.drawable.fff);
         listeBoutons.put(ListeConsoEnergieActivity.class, R.color.colorBtnPlaylist);
         listeBoutons.put(ListeLumieresActivity.class, R.drawable.fff);
-        listeBoutons.put(ListeDiffuseurOdeursActivity.class, R.drawable.fff);
 
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);

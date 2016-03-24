@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.androidquery.AQuery;
@@ -22,7 +21,6 @@ import fr.unice.mbds.maslow.entities.Evenement;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.interfaces.ICallback;
 import fr.unice.mbds.maslow.service.MeteorService;
-import im.delight.android.ddp.Meteor;
 
 /**
  * Created by Gael on 21/12/2015.
@@ -31,7 +29,6 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
     private Context context;
     private final Watchlist watchlist;
-    private Meteor meteor;
     private Map<Appareil, Switch> switchsAppareils = new HashMap<>();
 
     public LumieresItemAdapter(Context context, Watchlist watchlist) {
@@ -69,11 +66,14 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
         aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_appareil)).text(appareil.getNom());
 
-        Switch swtch = (Switch) aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_switch)).getView();
+        final Switch swtch = (Switch) aq.id(convertView.findViewById(R.id.activity_liste_lumieres_item_switch)).getView();
 
-        swtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        swtch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
+
+
+                boolean isChecked = swtch.isChecked();
 
                 String onId = "";
                 String offId = "";
@@ -105,7 +105,7 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
     @Override
     public void onDataAdded(String collectionName, String documentID, JSONObject newValueJson, Appareil appareil) {
-        updateValues(documentID, appareil, null);
+        updateValues(documentID, appareil, newValueJson);
     }
 
     private void updateValues(String documentID, Appareil appareil, JSONObject parameters) {

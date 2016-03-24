@@ -40,10 +40,6 @@ public class MeteorService implements MeteorCallback {
         return instance;
     }
 
-    public Meteor getMeteorInstance() {
-        return meteor;
-    }
-
     public void sendCommand(String commandId, JSONObject parameters) {
         meteor.call("sendCommandById", new Object[]{commandId, parameters}, new ResultListener() {
             @Override
@@ -71,7 +67,7 @@ public class MeteorService implements MeteorCallback {
 
     @Override
     public void onConnect(boolean b) {
-        Log.w("INFO", "Connecté au websocket.");
+        Log.w("INFO", "Connexion au websocket.");
 
         meteor.loginWithEmail(ApiUrlService.WEBSOCKET_USERNAME, ApiUrlService.WEBSOCKET_PASSWORD, new ResultListener() {
             @Override
@@ -87,12 +83,17 @@ public class MeteorService implements MeteorCallback {
                 Toast.makeText(callbackClass.getContext(), "Connexion au websocket échouée", Toast.LENGTH_LONG).show();
             }
         });
+
+        if (!meteor.isConnected()) {
+            Toast.makeText(callbackClass.getContext(), "Connexion à Orchestra impossible", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onDisconnect() {
         Toast.makeText(callbackClass.getContext(), "Déconnecté du websocket", Toast.LENGTH_LONG).show();
         Log.w("INFO", "Déconnecté du websocket.");
+        meteor.connect();
     }
 
     @Override
@@ -103,12 +104,14 @@ public class MeteorService implements MeteorCallback {
     @Override
     public void onDataAdded(String collectionName, String documentID, String newValueJson) {
         Log.w("onDataAdded ", "collectionName = [" + collectionName + "], documentID = [" + documentID + "], newValueJson = [" + newValueJson + "]");
-//        if (callbackClass != null) {
-//            Appareil appareilConcerne = checkId(documentID);
-//            if (appareilConcerne != null) {
-//                callbackClass.onDataAdded(collectionName, documentID, getParameters(newValueJson), appareilConcerne);
-//            }
-//        }
+        if ("events".equals(collectionName)) {
+            if (callbackClass != null) {
+                Appareil appareilConcerne = checkId(documentID);
+                if (appareilConcerne != null) {
+                    callbackClass.onDataAdded(collectionName, documentID, getParameters(newValueJson), appareilConcerne);
+                }
+            }
+        }
     }
 
     @Override

@@ -7,6 +7,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
@@ -79,6 +82,19 @@ public class Utilisateur implements IEntity {
         SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
 
         return sharedPreferences.getString("token", "");
+    }
+
+    public static String hashPassword(String password) {
+        byte[] hashedPassword = null;
+
+        try {
+            hashedPassword = MessageDigest.getInstance("md5").digest(password.getBytes());
+        } catch (NoSuchAlgorithmException ex) {
+            // Unlikely to happen
+            System.out.println("MD5 n'est pas présent sur le système");
+        }
+
+        return new String(hashedPassword);
     }
 
     @Override

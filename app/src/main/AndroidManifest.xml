@@ -42,41 +42,16 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.MainActivity" />
-        <activity
-            android:name=".view.activity.PlayListsActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.MainActivity" />
-        <activity
-            android:name=".view.activity.ListeMusiquesActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.PlayListsActivity" />
+            android:parentActivityName=".view.activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ListeConsoEnergieActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.MainActivity" />
+            android:parentActivityName=".view.activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ListeLumieresActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.MainActivity" />
-        <activity
-            android:name=".view.activity.ListeDiffuseurOdeursActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".view.activity.MainActivity" />
-        <activity
-            android:name=".SocketTest"
-            android:label="@string/title_activity_socket_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!--<activity-->
-        <!--android:name=".sendJsonData"-->
-        <!--android:label="@string/title_activity_send_json_data"-->
-        <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
-        <!--<activity-->
-        <!--android:name=".view.activity.LoginActivity"-->
-        <!--android:label="@string/title_activity_login"></activity>-->
+            android:parentActivityName=".view.activity.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
