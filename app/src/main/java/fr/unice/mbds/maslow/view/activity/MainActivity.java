@@ -13,6 +13,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.util.UtilisateurManager;
 import fr.unice.mbds.maslow.view.adapter.MainItemAdapter;
 import im.delight.android.ddp.MeteorSingleton;
 
@@ -89,7 +92,41 @@ public class MainActivity extends AppCompatActivity {
         }*/
         handleIntent(getIntent());
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem adminItem = (MenuItem) menu.findItem(R.id.action_admin);
+        if (UtilisateurManager.getIdentifiant(this).equals("admin")){
+            Toast.makeText(this,"LOGGER COMME : admin", Toast.LENGTH_LONG).show();
 
+        }else{
+            Toast.makeText(this, "LOGGER COMME : " + UtilisateurManager.getIdentifiant(this), Toast.LENGTH_LONG).show();
+        }
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_admin:
+                if (UtilisateurManager.getIdentifiant(this).equals("admin")){
+                    Toast.makeText(this,"LOGGER COMME : admin", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.liste_utilisateurs:
+                Intent intent = new Intent(this, AffichageUtilisateursActivity.class);
+                MainActivity.this.startActivity(intent);
+                return true;
+            case R.id.chercher_utilisateur:
+                Toast.makeText(this,"CHERCHER UTILISATEUR", Toast.LENGTH_LONG).show();
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
     public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
