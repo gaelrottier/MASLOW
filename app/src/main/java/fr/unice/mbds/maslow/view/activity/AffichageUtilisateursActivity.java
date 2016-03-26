@@ -17,6 +17,7 @@ import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.entities.Utilisateur;
 import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
+import fr.unice.mbds.maslow.util.UtilisateurManager;
 import fr.unice.mbds.maslow.view.adapter.UtilisateursItemAdapter;
 
 public class AffichageUtilisateursActivity extends AppCompatActivity {

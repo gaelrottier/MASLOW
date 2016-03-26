@@ -2,20 +2,20 @@ package fr.unice.mbds.maslow.view.activity;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import fr.unice.mbds.maslow.R;
-import fr.unice.mbds.maslow.entities.Utilisateur;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
+import fr.unice.mbds.maslow.util.UtilisateurManager;
 import fr.unice.mbds.maslow.view.adapter.LumieresItemAdapter;
 
 public class ListeLumieresActivity extends AppCompatActivity {
@@ -52,25 +52,39 @@ public class ListeLumieresActivity extends AppCompatActivity {
         @Override
         protected Watchlist doInBackground(Integer... params) {
             ResponseEntity<Watchlist> result = null;
+            Context context = ListeLumieresActivity.this;
 
-            try {
-                String url = ApiUrlService.addToken(ApiUrlService.getWatchlistUrl(params[0]), Utilisateur.getToken(ListeLumieresActivity.this));
+            String url = ApiUrlService.addToken(ApiUrlService
+                            .getWatchlistUrl(UtilisateurManager.getId(context),
+                                    params[0]),
+                    UtilisateurManager.getToken(context));
 
-                result = ApiCallService.getInstance().executeForEntity(url, HttpMethod.GET, null, Watchlist.class);
-            } catch (Exception e) {
-                Log.e("GET REST", e.getMessage());
+            result = ApiCallService.getInstance().executeForEntity(url, HttpMethod.GET, null, Watchlist.class);
+
+            if (result == null) {
+                //La watchlist n'existe pas, on la crée
+                String url2 = ApiUrlService.addToken(ApiUrlService
+                                .getWatchlistUrl(UtilisateurManager.getId(context),
+                                        params[0]),
+                        UtilisateurManager.getToken(context));
+
+                result = ApiCallService.getInstance().executeForEntity(url2, HttpMethod.POST, null, Watchlist.class);
             }
-
             return result.getBody() == null ? null : result.getBody();
         }
 
         @Override
         protected void onPostExecute(Watchlist watchlist) {
 
-            progress.hide();
+            if (watchlist == null) {
 
-            adapter = new LumieresItemAdapter(getApplicationContext(), watchlist);
-            listeLumieres.setAdapter(adapter);
+            } else {
+
+                progress.hide();
+
+                adapter = new LumieresItemAdapter(getApplicationContext(), watchlist);
+                listeLumieres.setAdapter(adapter);
+            }
         }
     }
 

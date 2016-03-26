@@ -16,40 +16,39 @@ public class ApiUrlService {
     public static String UTILISATEUR_URL = SERVER_BASE_URL + "u/";
     public static String AUTH_URL = UTILISATEUR_URL + "auth/";
 
-    public static String WATCHLIST_URL = SERVER_BASE_URL + "w/";
+    private static String WATCHLIST_URL = "w/";
     private static String APPAREIL_URL = "a/";
     private static String EVENEMENT_URL = "e/";
 
     public static String PROCEDURAL_URL = "p/";
     private static String OPERATION_URL = "o/";
 
-
     /**
-     * @return http://url:8080/w/idWatchlist/
+     * @return http://url:8080/a/idUtilisateur/w/idWatchlist/
      */
-    public static String getWatchlistUrl(int idWatchlist) {
-        return WATCHLIST_URL + idWatchlist + "/";
+    public static String getWatchlistUrl(int idUtilisateur, int idWatchlist) {
+        return UTILISATEUR_URL + idUtilisateur + "/" + WATCHLIST_URL + idWatchlist + "/";
     }
 
     /**
      * @return http://url:8080/w/idWatchlist/a/
      */
-    public static String getAppareilUrl(int idWatchlist) {
-        return getWatchlistUrl(idWatchlist) + APPAREIL_URL;
+    public static String getWatchlistAppareilUrl(int idUtilisateur, int idWatchlist) {
+        return getWatchlistUrl(idUtilisateur, idWatchlist) + APPAREIL_URL;
     }
 
     /**
      * @return http://url:8080/w/idWatchlist/a/idAppareil/
      */
-    public static String getAppareilUrl(int idWatchlist, int idAppareil) {
-        return getAppareilUrl(idWatchlist) + idAppareil + "/";
+    public static String getWatchlistAppareilUrl(int idUtilisateur, int idWatchlist, int idAppareil) {
+        return getWatchlistAppareilUrl(idUtilisateur, idWatchlist) + idAppareil + "/";
     }
 
     /**
      * @return http://url:8080/w/idWatchlist/a/idAppareil/e/
      */
     public static String getEvenementUrl(int idWatchlist, int idAppareil) {
-        return getAppareilUrl(idWatchlist, idAppareil) + EVENEMENT_URL;
+        return getWatchlistAppareilUrl(idWatchlist, idAppareil) + EVENEMENT_URL;
     }
 
     /**

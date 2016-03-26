@@ -1,14 +1,13 @@
 package fr.unice.mbds.maslow.entities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import fr.unice.mbds.maslow.interfaces.IEntity;
 
@@ -26,6 +25,12 @@ public class Utilisateur implements IEntity {
 
     @JsonIgnore
     private String password;
+
+    @JsonIgnore
+    private List<Watchlist> watchlists;
+
+    @JsonIgnore
+    private List<Watchlist> procedurals;
 
     public Utilisateur() {
     }
@@ -78,23 +83,43 @@ public class Utilisateur implements IEntity {
         this.password = password;
     }
 
-    public static String getToken(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("utilisateur", Context.MODE_PRIVATE);
+    public List<Watchlist> getWatchlists() {
+        return watchlists;
+    }
 
-        return sharedPreferences.getString("token", "");
+    public void setWatchlists(List<Watchlist> watchlists) {
+        this.watchlists = watchlists;
+    }
+
+    public List<Watchlist> getProcedurals() {
+        return procedurals;
+    }
+
+    public void setProcedurals(List<Watchlist> procedurals) {
+        this.procedurals = procedurals;
     }
 
     public static String hashPassword(String password) {
-        byte[] hashedPassword = null;
+        String hashedPassword = "";
 
         try {
-            hashedPassword = MessageDigest.getInstance("md5").digest(password.getBytes());
-        } catch (NoSuchAlgorithmException ex) {
-            // Unlikely to happen
-            System.out.println("MD5 n'est pas présent sur le système");
+            // Create MD5 Hash
+
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(password.getBytes("UTF-8"));
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            hashedPassword = hexString.toString();
+
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
-        return new String(hashedPassword);
+        return hashedPassword;
     }
 
     @Override

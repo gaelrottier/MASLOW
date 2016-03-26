@@ -1,3 +1,4 @@
+
 package fr.unice.mbds.maslow.entities;
 
 import android.util.Log;
@@ -14,26 +15,27 @@ import java.util.Map;
 import fr.unice.mbds.maslow.interfaces.IEntity;
 
 /**
- * Created by Gael on 14/03/2016.
+ * Created by Gael on 17/02/2016.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Evenement implements IEntity {
+public class Operation implements IEntity {
 
-    private String id;
+    int id;
 
-    private String idOrchestra;
+    String idOrchestra;
 
-    //    {"nom":"on","nomOrchestra":"switchOn"}
-    private Map<String, String> alias;
+    Procedural procedural;
 
-    public Evenement() {
+    private Map<String, String> params;
+
+    public Operation() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -45,12 +47,20 @@ public class Evenement implements IEntity {
         this.idOrchestra = idOrchestra;
     }
 
-    public Map<String, String> getAlias() {
-        return alias;
+    public Procedural getProcedural() {
+        return procedural;
     }
 
-    public void setAlias(Map<String, String> alias) {
-        this.alias = alias;
+    public void setProcedural(Procedural procedural) {
+        this.procedural = procedural;
+    }
+
+    public Map<String, String> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, String> alias) {
+        this.params = alias;
     }
 
     @Override

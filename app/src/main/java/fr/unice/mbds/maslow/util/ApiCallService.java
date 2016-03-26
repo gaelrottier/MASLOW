@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class ApiCallService<T extends IEntity> {
         return instance;
     }
 
-    public ResponseEntity executeForJson(String url, HttpMethod methode, JSONObject entity, Class<T> typeRetour) throws Exception {
+    public ResponseEntity executeForJson(String url, HttpMethod methode, JSONObject entity, Class<T> typeRetour) {
         if (entity != null) {
             return execute(url, methode, entity, typeRetour);
         } else {
@@ -57,7 +58,7 @@ public class ApiCallService<T extends IEntity> {
         return restTemplate;
     }
 
-    public ResponseEntity execute(String url, HttpMethod methode, JSONObject entity, Class<?> typeRetour) throws Exception {
+    public ResponseEntity execute(String url, HttpMethod methode, JSONObject entity, Class<?> typeRetour) {
         HttpHeaders httpHeaders = prepareHttpHeaders();
 
         RestTemplate restTemplate = prepareRestTemplate();
@@ -68,30 +69,36 @@ public class ApiCallService<T extends IEntity> {
             httpEntity = new HttpEntity<>(entity.toString(), httpHeaders);
         }
 
+        ResponseEntity<?> result = null;
 
         try {
-            return restTemplate.exchange(url, methode, httpEntity, typeRetour);
+            result = restTemplate.exchange(url, methode, httpEntity, typeRetour);
         } catch (Exception e) {
             Log.e("requête http", e.getMessage());
-            throw e;
         }
+
+        return result;
     }
 
-    public ResponseEntity executeForList(String url, ParameterizedTypeReference<List<T>> typeRetour) throws Exception {
+    public ResponseEntity executeForList(String url, ParameterizedTypeReference<List<T>> typeRetour) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
+        ResponseEntity<List<T>> result = null;
+
         try {
-            return restTemplate.exchange(url, HttpMethod.GET, null, typeRetour);
-        } catch (Exception e) {
-            throw e;
+            result = restTemplate.exchange(url, HttpMethod.GET, null, typeRetour);
+        } catch (RestClientException e) {
+            Log.e("rest ", e.getMessage());
         }
+
+        return result;
     }
 
-    public ResponseEntity executeForEntity(String url, HttpMethod methode, T entity, Class<T> typeRetour) throws Exception {
+    public ResponseEntity executeForEntity(String url, HttpMethod methode, T entity, Class<T> typeRetour) {
         if (entity != null) {
             return execute(url, methode, entity.toJson(), typeRetour);
         } else {

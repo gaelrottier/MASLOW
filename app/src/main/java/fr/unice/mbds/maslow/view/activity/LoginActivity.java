@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = (AutoCompleteTextView) aq.id(R.id.activity_login_email).getTextView();
         txtPassword = aq.id(R.id.activity_login_password).getEditText();
 
-        ApiUrlService.addToken(ApiUrlService.getProceduralUrl(1, 2), Utilisateur.getToken(this));
+        ApiUrlService.addToken(ApiUrlService.getProceduralUrl(1, 2), UtilisateurManager.getToken(this));
 
 
         aq.id(R.id.activity_login_sign_in_button).clicked(new OnClickListener() {
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject credentials = new JSONObject();
             try {
                 credentials.put("identifiant", username);
-                credentials.put("password", password);
+                credentials.put("password", Utilisateur.hashPassword(password));
             } catch (JSONException e) {
                 Log.e("json parsing", e.getMessage());
             }
