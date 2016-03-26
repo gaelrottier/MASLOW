@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,23 +50,19 @@ public class AffichageUtilisateursActivity extends AppCompatActivity {
 
         @Override
         protected List<Utilisateur> doInBackground(Integer... params) {
-            List<Utilisateur> result = null;
+            ResponseEntity result = null;
 
             try {
-//                RestTemplate restTemplate = new RestTemplate();
-//                resultat = restTemplate.getForObject(ApiUrlService.UTILISATEURS_URL,UtilisateursInfoResponse.class).getUtilisateurs();
-                //System.out.println("UTILISATEURS "+utilisateurs.toString());
-                //result = ApiCallService.getInstance().execute(ApiUrlService.getUserListUrl(), HttpMethod.GET, null, Utilisateur.class);
-                result = (List<Utilisateur>) ApiCallService.getInstance().executeForList(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL, Utilisateur.getToken(AffichageUtilisateursActivity.this)),
+
+                result = ApiCallService.getInstance().executeForList(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL, Utilisateur.getToken(AffichageUtilisateursActivity.this)),
                         new ParameterizedTypeReference<List<Utilisateur>>() {
                         });
             } catch (Exception e) {
                 Log.e("GET REST", e.getMessage());
 
             }
-
-            utilisateurs =  result;
-            return  result;
+            utilisateurs = (ArrayList<Utilisateur>) result.getBody();
+            return utilisateurs;
         }
 
         @Override
