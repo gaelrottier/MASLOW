@@ -1,7 +1,9 @@
 package fr.unice.mbds.maslow.view.adapter;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -82,7 +84,17 @@ public class UtilisateursItemAdapter extends BaseAdapter {
         aq.id(R.id.buttonSupprimerUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AsyncTaskDeleteUtilisateurs().execute(utilisateurList.get(position).getId());
+                AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                adb.setTitle("Annuler");
+                adb.setMessage("Supprimer l'utilisateur ? ");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        new AsyncTaskDeleteUtilisateurs().execute(utilisateurList.get(position).getId());
+                    }
+                });
+                adb.show();
+
             }
         });
         return convertView;
@@ -108,7 +120,7 @@ public class UtilisateursItemAdapter extends BaseAdapter {
                 result = ApiCallService.getInstance().execute(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL + "/" + params[0] + "/", UtilisateurManager.getToken(context)), HttpMethod.DELETE,
                         null, Utilisateur.class);
             } catch (Exception e) {
-                Log.e("GET REST", e.getMessage());
+                Log.e("DELETTE REST", e.getMessage());
 
             }
             context.startActivity(new Intent(context, AffichageUtilisateursActivity.class));
