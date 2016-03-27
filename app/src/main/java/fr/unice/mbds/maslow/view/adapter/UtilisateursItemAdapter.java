@@ -28,7 +28,7 @@ import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
 import fr.unice.mbds.maslow.util.UtilisateurManager;
 import fr.unice.mbds.maslow.view.activity.AffichageUtilisateursActivity;
-import fr.unice.mbds.maslow.view.activity.DetailUtilisateurActivity;
+import fr.unice.mbds.maslow.view.activity.AfficherUtilisateurActivity;
 
 /**
  * Created by Zac on 21/03/2016.
@@ -69,7 +69,7 @@ public class UtilisateursItemAdapter extends BaseAdapter {
         aq.id(R.id.buttonDetailUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailUtilisateurActivity.class);
+                Intent intent = new Intent(context, AfficherUtilisateurActivity.class);
                 Bundle extra = new Bundle();
                 Map<String, String> strings = new HashMap<String, String>();
                 strings.put("nom", utilisateurList.get(position).getNom());

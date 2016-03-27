@@ -55,6 +55,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        aq.id(R.id.activity_login_senregistrer).clicked(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CreerUtilisateurActivity.class));
+            }
+        });
     }
 
     /**

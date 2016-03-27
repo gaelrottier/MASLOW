@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="15dp"
     android:fitsSystemWindows="true"
-    tools:context="fr.unice.mbds.maslow.view.activity.AfficherUtilisateurActivity">
+    tools:context=".view.activity.CreerUtilisateurActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

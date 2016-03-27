@@ -57,11 +57,11 @@
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.activity.AfficherUtilisateurActivity"
+            android:name=".view.activity.CreerUtilisateurActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.activity.DetailUtilisateurActivity"
+            android:name=".view.activity.AfficherUtilisateurActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait" />
     </application>
