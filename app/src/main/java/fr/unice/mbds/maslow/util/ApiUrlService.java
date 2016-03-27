@@ -11,7 +11,7 @@ public class ApiUrlService {
 
     private static String TOKEN_BASE = "?token=";
 
-    public static String SERVER_BASE_URL = "http://192.168.43.239:8080/";
+    public static String SERVER_BASE_URL = "http://192.168.46.1:8080/";
 
     public static String UTILISATEUR_URL = SERVER_BASE_URL + "u/";
     public static String AUTH_URL = UTILISATEUR_URL + "auth/";

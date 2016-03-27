@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:paddingTop="15dp"
-    tools:context="fr.unice.mbds.maslow.view.activity.ModifierUtilisateurActivity">
+    tools:context="fr.unice.mbds.maslow.view.activity.ModifierUtilisateurActivity"
+    android:backgroundTint="@android:drawable/ic_menu_manage">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

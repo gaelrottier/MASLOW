@@ -55,7 +55,7 @@ public class AffichageUtilisateursActivity extends AppCompatActivity {
 
             try {
 
-                result = ApiCallService.getInstance().executeForList(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL, Utilisateur.getToken(AffichageUtilisateursActivity.this)),
+                result = ApiCallService.getInstance().executeForList(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL, UtilisateurManager.getToken(AffichageUtilisateursActivity.this)),
                         new ParameterizedTypeReference<List<Utilisateur>>() {
                         });
             } catch (Exception e) {
