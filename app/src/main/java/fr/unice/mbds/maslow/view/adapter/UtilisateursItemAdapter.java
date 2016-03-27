@@ -1,13 +1,19 @@
 package fr.unice.mbds.maslow.view.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.androidquery.AQuery;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,6 +22,10 @@ import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
 import fr.unice.mbds.maslow.entities.Utilisateur;
+import fr.unice.mbds.maslow.util.ApiCallService;
+import fr.unice.mbds.maslow.util.ApiUrlService;
+import fr.unice.mbds.maslow.util.UtilisateurManager;
+import fr.unice.mbds.maslow.view.activity.AffichageUtilisateursActivity;
 import fr.unice.mbds.maslow.view.activity.DetailUtilisateurActivity;
 
 /**
@@ -60,14 +70,68 @@ public class UtilisateursItemAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, DetailUtilisateurActivity.class);
                 Bundle extra = new Bundle();
                 Map<String, String> strings = new HashMap<String, String>();
-                strings.put("nom",utilisateurList.get(position).getNom());
-                strings.put("prenom",utilisateurList.get(position).getPrenom());
-                strings.put("identifiant",utilisateurList.get(position).getIdentifiant());
+                strings.put("nom", utilisateurList.get(position).getNom());
+                strings.put("prenom", utilisateurList.get(position).getPrenom());
+                strings.put("identifiant", utilisateurList.get(position).getIdentifiant());
                 extra.putSerializable("detailUtilisateur", (Serializable) strings);
                 intent.putExtra("extra", extra);
                 context.startActivity(intent);
             }
         });
+
+        aq.id(R.id.buttonSupprimerUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTaskDeleteUtilisateurs().execute(utilisateurList.get(position).getId());
+            }
+        });
         return convertView;
+    }
+
+    private class AsyncTaskDeleteUtilisateurs extends AsyncTask<Integer, Integer, Void> {
+
+        private ProgressDialog progress;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = setProgressDialog();
+            progress.show();
+        }
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            ResponseEntity result = null;
+
+            try {
+
+                result = ApiCallService.getInstance().execute(ApiUrlService.addToken(ApiUrlService.UTILISATEUR_URL + "/" + params[0] + "/", UtilisateurManager.getToken(context)), HttpMethod.DELETE,
+                        null, Utilisateur.class);
+            } catch (Exception e) {
+                Log.e("GET REST", e.getMessage());
+
+            }
+            context.startActivity(new Intent(context, AffichageUtilisateursActivity.class));
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void vide) {
+            super.onPostExecute(vide);
+            progress.hide();
+
+        }
+    }
+
+
+    private ProgressDialog setProgressDialog() {
+        ProgressDialog progressDialog = new ProgressDialog(context);
+
+        progressDialog.setMessage("Patientez...");
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        return progressDialog;
     }
 }
