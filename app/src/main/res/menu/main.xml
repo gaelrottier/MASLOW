@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:icon="@android:drawable/ic_menu_manage">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/action_admin"
         android:title="GestionUtilisateur"
-        >
-        <menu android:id="@+id/sousmenuadmin">
+        android:icon="@android:drawable/ic_menu_manage">
             <item android:id="@+id/liste_utilisateurs"
                 android:title="Liste Utilisateurs"/>
 
             <item android:id="@+id/chercher_utilisateur"
                 android:title="Chercher Utilisateur" />
-
-        </menu>
-
     </item>
 </menu>
