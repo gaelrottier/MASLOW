@@ -64,39 +64,41 @@ public class UtilisateursItemAdapter extends BaseAdapter {
         }
 
         AQuery aq = new AQuery(convertView);
-        aq.id(R.id.textViewNomUserList).text(utilisateurList.get(position).getNom());
-        aq.id(R.id.textViewPrenomUserList).text(utilisateurList.get(position).getPrenom());
-        aq.id(R.id.buttonDetailUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AfficherUtilisateurActivity.class);
-                Bundle extra = new Bundle();
-                Map<String, String> strings = new HashMap<String, String>();
-                strings.put("nom", utilisateurList.get(position).getNom());
-                strings.put("prenom", utilisateurList.get(position).getPrenom());
-                strings.put("identifiant", utilisateurList.get(position).getIdentifiant());
-                extra.putSerializable("detailUtilisateur", (Serializable) strings);
-                intent.putExtra("extra", extra);
-                context.startActivity(intent);
-            }
-        });
+        if (!utilisateurList.get(position).getIdentifiant().equals("admin")) {
+            aq.id(R.id.textViewNomUserList).text(utilisateurList.get(position).getNom());
+            aq.id(R.id.textViewPrenomUserList).text(utilisateurList.get(position).getPrenom());
+            aq.id(R.id.buttonDetailUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, AfficherUtilisateurActivity.class);
+                    Bundle extra = new Bundle();
+                    Map<String, String> strings = new HashMap<String, String>();
+                    strings.put("nom", utilisateurList.get(position).getNom());
+                    strings.put("prenom", utilisateurList.get(position).getPrenom());
+                    strings.put("identifiant", utilisateurList.get(position).getIdentifiant());
+                    extra.putSerializable("detailUtilisateur", (Serializable) strings);
+                    intent.putExtra("extra", extra);
+                    context.startActivity(intent);
+                }
+            });
 
-        aq.id(R.id.buttonSupprimerUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder adb = new AlertDialog.Builder(context);
-                adb.setTitle("Annuler");
-                adb.setMessage("Supprimer l'utilisateur ? ");
-                adb.setNegativeButton("Cancel", null);
-                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        new AsyncTaskDeleteUtilisateurs().execute(utilisateurList.get(position).getId());
-                    }
-                });
-                adb.show();
+            aq.id(R.id.buttonSupprimerUtilisateur).getButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                    adb.setTitle("Annuler");
+                    adb.setMessage("Supprimer l'utilisateur ? ");
+                    adb.setNegativeButton("Cancel", null);
+                    adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            new AsyncTaskDeleteUtilisateurs().execute(utilisateurList.get(position).getId());
+                        }
+                    });
+                    adb.show();
 
-            }
-        });
+                }
+            });
+        }
         return convertView;
     }
 
