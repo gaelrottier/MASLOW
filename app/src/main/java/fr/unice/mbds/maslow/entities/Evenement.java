@@ -19,7 +19,7 @@ import fr.unice.mbds.maslow.interfaces.IEntity;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Evenement implements IEntity {
 
-    private String id;
+    private Integer id;
 
     private String idOrchestra;
 
@@ -29,11 +29,11 @@ public class Evenement implements IEntity {
     public Evenement() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

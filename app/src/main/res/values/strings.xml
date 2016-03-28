@@ -27,4 +27,9 @@
     <string name="btn_activity_modifier_utilisateur_password_valider">Valider la modification</string>
     <string name="action_senregistrer">s\'enregistrer</string>
     <string name="title_activity_lifi">LifiActivity</string>
+    <string name="txt_menu_btn_add_appareil">Ajouter un appareil</string>
+    <string name="txt_dialog_add_appareil_title">Ajouter un appareil</string>
+    <string name="txt_dialog_add_appareil_appareils_existants">Appareils existants</string>
+    <string name="btn_txt_valider">Valider</string>
+    <string name="txt_dialog_add_appareil_nouvel_appareil">Nouvel appareil</string>
 </resources>

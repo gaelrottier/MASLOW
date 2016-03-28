@@ -19,6 +19,7 @@ import fr.unice.mbds.maslow.entities.Appareil;
 import fr.unice.mbds.maslow.entities.Evenement;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.interfaces.ICallback;
+import fr.unice.mbds.maslow.service.MeteorService;
 
 /**
  * Created by Gael on 21/12/2015.
@@ -27,11 +28,13 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     private Context context;
     private Map<Appareil, TextView> element;
-    private final Watchlist watchlist;
+    private Watchlist watchlist;
 
     public ConsoEnergieItemAdapter(Context context, Watchlist watchlist) {
         this.context = context;
         this.watchlist = watchlist;
+
+        MeteorService.getInstance().setCallbackClass(this);
     }
 
     @Override
@@ -98,6 +101,16 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
     @Override
     public Watchlist getWatchlist() {
         return watchlist;
+    }
+
+    @Override
+    public void setWatchlist(Watchlist watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    @Override
+    public void reconnect() {
+        MeteorService.getInstance().setCallbackClass(this);
     }
 
     @Override

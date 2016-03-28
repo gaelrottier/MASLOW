@@ -20,5 +20,9 @@ public interface ICallback {
 
     Watchlist getWatchlist();
 
+    void setWatchlist(Watchlist watchlist);
+
+    void reconnect();
+
     Context getContext();
 }

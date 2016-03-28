@@ -11,12 +11,13 @@ public class ApiUrlService {
 
     private static String TOKEN_BASE = "?token=";
 
-    public static String SERVER_BASE_URL = "http://192.168.46.1:8080/";
+    public static String SERVER_BASE_URL = "http://192.168.43.239:8080/";
 
     public static String UTILISATEUR_URL = SERVER_BASE_URL + "u/";
     public static String AUTH_URL = UTILISATEUR_URL + "auth/";
 
     private static String WATCHLIST_URL = "w/";
+    public static String APPAREILS_URL = SERVER_BASE_URL + "a/";
     private static String APPAREIL_URL = "a/";
     private static String EVENEMENT_URL = "e/";
 
@@ -31,14 +32,14 @@ public class ApiUrlService {
     }
 
     /**
-     * @return http://url:8080/w/idWatchlist/a/
+     * @return http://url:8080/u/idUtilisateur/w/idWatchlist/a/
      */
     public static String getWatchlistAppareilUrl(int idUtilisateur, int idWatchlist) {
         return getWatchlistUrl(idUtilisateur, idWatchlist) + APPAREIL_URL;
     }
 
     /**
-     * @return http://url:8080/w/idWatchlist/a/idAppareil/
+     * @return http://url:8080/u/idUtilisateur/w/idWatchlist/a/idAppareil/
      */
     public static String getWatchlistAppareilUrl(int idUtilisateur, int idWatchlist, int idAppareil) {
         return getWatchlistAppareilUrl(idUtilisateur, idWatchlist) + idAppareil + "/";
