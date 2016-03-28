@@ -43,6 +43,10 @@ public class Appareil implements IEntity {
     public Appareil() {
     }
 
+    public Appareil(Integer id) {
+
+    }
+
     public Integer getId() {
         return id;
     }

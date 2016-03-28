@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:focusable="false"
-            android:text="Saisir" />
+            android:text="6DXJvDjpbxjYeDwJT" />
+        <!--android:text="Saisir" />-->
     </LinearLayout>
 
 

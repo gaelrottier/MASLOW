@@ -19,7 +19,8 @@
             android:id="@+id/txt_dialog_add_alias_expandable_list_item_child_cle_parametre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="nom" />
 
         <Button
             android:id="@+id/btn_dialog_add_evenement_del_alias"
@@ -47,7 +48,8 @@
             android:id="@+id/txt_dialog_add_alias_expandable_list_item_child_valeur_parametre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="conso" />
     </LinearLayout>
 
 </LinearLayout>

@@ -31,8 +31,10 @@ public class Utilisateur implements IEntity {
 
     private String password;
 
+    @JsonIgnore
     private List<Watchlist> watchlists;
 
+    @JsonIgnore
     private List<Watchlist> procedurals;
 
     public Utilisateur() {
@@ -87,7 +89,6 @@ public class Utilisateur implements IEntity {
         this.password = password;
     }
 
-    @JsonIgnore
     public List<Watchlist> getWatchlists() {
         return watchlists;
     }
@@ -96,7 +97,6 @@ public class Utilisateur implements IEntity {
         this.watchlists = watchlists;
     }
 
-    @JsonIgnore
     public List<Watchlist> getProcedurals() {
         return procedurals;
     }
