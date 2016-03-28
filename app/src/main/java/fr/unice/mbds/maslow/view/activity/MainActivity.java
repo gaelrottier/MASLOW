@@ -120,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(intent);
                   }
                 return true;
-//            case R.id.chercher_utilisateur:
-//                Toast.makeText(this,"CHERCHER UTILISATEUR", Toast.LENGTH_LONG).show();
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
