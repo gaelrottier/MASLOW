@@ -112,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //                return true;
 //            case R.id.liste_utilisateurs:
+//                if (UtilisateurManager.getIdentifiant(this).equals("admin")){
 //                Intent intent = new Intent(this, AffichageUtilisateursActivity.class);
 //                MainActivity.this.startActivity(intent);
+//                  }
 //                return true;
 //            case R.id.chercher_utilisateur:
 //                Toast.makeText(this,"CHERCHER UTILISATEUR", Toast.LENGTH_LONG).show();

@@ -7,7 +7,7 @@
             <item android:id="@+id/liste_utilisateurs"
                 android:title="Liste Utilisateurs"/>
 
-            <item android:id="@+id/chercher_utilisateur"
-                android:title="Chercher Utilisateur" />
+            <!--<item android:id="@+id/chercher_utilisateur"-->
+                <!--android:title="Chercher Utilisateur" />-->
     </item>
 </menu>
