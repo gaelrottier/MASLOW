@@ -3,6 +3,7 @@
     package="fr.unice.mbds.maslow">
 
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -64,6 +65,10 @@
             android:name=".view.activity.AfficherUtilisateurActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.LifiActivity"
+            android:label="@string/title_activity_lifi"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -26,4 +26,5 @@
     <string name="txt_activity_modifier_utilisateur_password">Mot de passe</string>
     <string name="btn_activity_modifier_utilisateur_password_valider">Valider la modification</string>
     <string name="action_senregistrer">s\'enregistrer</string>
+    <string name="title_activity_lifi">LifiActivity</string>
 </resources>
