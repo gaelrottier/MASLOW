@@ -1,7 +1,13 @@
 package fr.unice.mbds.maslow.entities;
 
+import android.util.Log;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -23,13 +29,10 @@ public class Utilisateur implements IEntity {
     private String identifiant;
     private String token;
 
-    @JsonIgnore
     private String password;
 
-    @JsonIgnore
     private List<Watchlist> watchlists;
 
-    @JsonIgnore
     private List<Watchlist> procedurals;
 
     public Utilisateur() {
@@ -75,6 +78,7 @@ public class Utilisateur implements IEntity {
         this.token = token;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -83,6 +87,7 @@ public class Utilisateur implements IEntity {
         this.password = password;
     }
 
+    @JsonIgnore
     public List<Watchlist> getWatchlists() {
         return watchlists;
     }
@@ -91,6 +96,7 @@ public class Utilisateur implements IEntity {
         this.watchlists = watchlists;
     }
 
+    @JsonIgnore
     public List<Watchlist> getProcedurals() {
         return procedurals;
     }
@@ -124,6 +130,13 @@ public class Utilisateur implements IEntity {
 
     @Override
     public JSONObject toJson() {
-        return null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            return new JSONObject(mapper.writeValueAsString(this));
+        } catch (JSONException | JsonProcessingException e) {
+            Log.e("Serialisation", e.getMessage());
+            return null;
+        }
     }
 }

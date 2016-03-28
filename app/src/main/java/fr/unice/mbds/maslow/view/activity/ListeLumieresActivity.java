@@ -97,11 +97,11 @@ public class ListeLumieresActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Watchlist watchlist) {
 
+            progress.hide();
             if (watchlist == null) {
 
             } else {
 
-                progress.hide();
 
                 adapter = new LumieresItemAdapter(getApplicationContext(), watchlist);
                 listeLumieres.setAdapter(adapter);
