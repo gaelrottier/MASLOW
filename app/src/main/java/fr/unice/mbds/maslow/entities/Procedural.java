@@ -53,9 +53,7 @@ public class Procedural implements IEntity {
         return params;
     }
 
-    public void setParams(Map<String, String> params) {
-        this.params = params;
-    }
+    public void setParams(Map<String, String> params) { this.params = params;  }
 
     @Override
     public JSONObject toJson() {

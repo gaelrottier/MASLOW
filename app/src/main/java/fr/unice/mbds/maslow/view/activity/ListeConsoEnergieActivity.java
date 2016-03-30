@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import fr.unice.mbds.maslow.R;
+import fr.unice.mbds.maslow.entities.Procedural;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.util.ApiCallService;
 import fr.unice.mbds.maslow.util.ApiUrlService;
@@ -98,4 +99,7 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
 
         return progressDialog;
     }
+
+
+
 }
