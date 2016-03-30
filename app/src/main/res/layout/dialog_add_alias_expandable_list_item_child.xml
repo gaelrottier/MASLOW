@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nom pour l'application : " />
+
+        <EditText
+            android:id="@+id/txt_dialog_add_alias_expandable_list_item_child_cle_parametre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="nom" />
+
+        <Button
+            android:id="@+id/btn_dialog_add_evenement_del_alias"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="75dp"
+            android:background="@android:drawable/ic_menu_delete"
+            android:backgroundTint="@color/colorAccent"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nom du paramètre reçu : " />
+
+        <EditText
+            android:id="@+id/txt_dialog_add_alias_expandable_list_item_child_valeur_parametre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="conso" />
+    </LinearLayout>
+
+</LinearLayout>

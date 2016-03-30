@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="400dp"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_dialog_add_appareil_title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/txt_dialog_add_appareil_appareils_existants"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/dialog_add_appareil_spinner_appareils_existants"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="4" />
+
+            <Button
+                android:id="@+id/btn_dialog_valider_add_appareil_existant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/btn_txt_valider" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/txt_dialog_add_appareil_nouvel_appareil"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Nom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/edit_dialog_add_appareil_new_nom"
+                android:layout_columnSpan="1"
+                android:layout_gravity="center_horizontal"
+                android:text="Réfrigirateur" />
+
+            <TextView
+                android:layout_columnSpan="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Évènements"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/btn_dialog_add_evenement_new_evenement"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_columnSpan="1"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:background="@android:drawable/ic_input_add" />
+
+            <ExpandableListView
+                android:id="@+id/dialog_add_appareil_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_columnSpan="2"></ExpandableListView>
+
+
+            <Button
+                android:id="@+id/btn_valider_add_product_nouveau"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center"
+                android:text="@string/btn_txt_valider" />
+
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

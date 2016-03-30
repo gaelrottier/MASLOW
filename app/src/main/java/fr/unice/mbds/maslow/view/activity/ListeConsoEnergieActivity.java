@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.springframework.http.HttpMethod;
@@ -38,6 +41,25 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_add_appareil, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_btn_add_appareil:
+                AddAppareilDialog addAppareilDialog = new AddAppareilDialog(this, WATCHLIST_ID, adapter.getWatchlist().getAppareils(), adapter);
+                addAppareilDialog.show(getFragmentManager(), "addAppareil");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private class AsyncGetWatchlist extends AsyncTask<Integer, Integer, Watchlist> {
 
         private ProgressDialog progress;
@@ -54,14 +76,12 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
             ResponseEntity<Watchlist> result = null;
             Context context = ListeConsoEnergieActivity.this;
 
-
             String url = ApiUrlService.addToken(ApiUrlService
                             .getWatchlistUrl(UtilisateurManager.getId(context),
                                     params[0]),
                     UtilisateurManager.getToken(context));
 
             result = ApiCallService.getInstance().executeForEntity(url, HttpMethod.GET, null, Watchlist.class);
-
 
             if (result == null) {
                 //La watchlist n'existe pas, on la crée
@@ -72,7 +92,6 @@ public class ListeConsoEnergieActivity extends AppCompatActivity {
 
                 result = ApiCallService.getInstance().executeForEntity(url2, HttpMethod.POST, null, Watchlist.class);
             }
-
             return result.getBody() == null ? null : result.getBody();
         }
 

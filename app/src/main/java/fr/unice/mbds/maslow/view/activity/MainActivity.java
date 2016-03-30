@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         LinkedHashMap<Class<? extends AppCompatActivity>, Integer> listeBoutons = new LinkedHashMap<>();
 
-        listeBoutons.put(ListeConsoEnergieActivity.class, R.color.colorBtnPlaylist);
-        listeBoutons.put(ListeLumieresActivity.class, R.drawable.fff);
+        listeBoutons.put(ListeConsoEnergieActivity.class, R.drawable.prise_electrique);
+        listeBoutons.put(ListeLumieresActivity.class, R.drawable.switch_image);
 
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
@@ -115,11 +115,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.liste_utilisateurs:
+                if (UtilisateurManager.getIdentifiant(this).equals("admin")){
                 Intent intent = new Intent(this, AffichageUtilisateursActivity.class);
                 MainActivity.this.startActivity(intent);
+                  }
                 return true;
-            case R.id.chercher_utilisateur:
-                Toast.makeText(this,"CHERCHER UTILISATEUR", Toast.LENGTH_LONG).show();
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

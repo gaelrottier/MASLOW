@@ -6,6 +6,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.springframework.http.HttpMethod;
@@ -37,6 +40,24 @@ public class ListeLumieresActivity extends AppCompatActivity {
         new AsyncGetWatchlist().execute(WATCHLIST_ID);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_add_appareil, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_btn_add_appareil:
+                AddAppareilDialog addAppareilDialog = new AddAppareilDialog(this, WATCHLIST_ID, adapter.getWatchlist().getAppareils(), adapter);
+                addAppareilDialog.show(getFragmentManager(), "addAppareil");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private class AsyncGetWatchlist extends AsyncTask<Integer, Integer, Watchlist> {
 
@@ -76,11 +97,11 @@ public class ListeLumieresActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Watchlist watchlist) {
 
+            progress.hide();
             if (watchlist == null) {
 
             } else {
 
-                progress.hide();
 
                 adapter = new LumieresItemAdapter(getApplicationContext(), watchlist);
                 listeLumieres.setAdapter(adapter);

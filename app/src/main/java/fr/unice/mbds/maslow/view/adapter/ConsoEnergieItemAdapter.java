@@ -12,6 +12,7 @@ import com.androidquery.AQuery;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import fr.unice.mbds.maslow.R;
@@ -19,6 +20,7 @@ import fr.unice.mbds.maslow.entities.Appareil;
 import fr.unice.mbds.maslow.entities.Evenement;
 import fr.unice.mbds.maslow.entities.Watchlist;
 import fr.unice.mbds.maslow.interfaces.ICallback;
+import fr.unice.mbds.maslow.service.MeteorService;
 
 /**
  * Created by Gael on 21/12/2015.
@@ -27,11 +29,14 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     private Context context;
     private Map<Appareil, TextView> element;
-    private final Watchlist watchlist;
+    private Watchlist watchlist;
 
     public ConsoEnergieItemAdapter(Context context, Watchlist watchlist) {
         this.context = context;
         this.watchlist = watchlist;
+        element = new HashMap<>();
+
+        MeteorService.getInstance().setCallbackClass(this);
     }
 
     @Override
@@ -59,7 +64,7 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
         Appareil appareil = watchlist.getAppareils().get(position);
 
         aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_appareil)).text(appareil.getNom());
-        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text("0 W");
+        aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).text("nulle");
         element.put(appareil, aq.id(convertView.findViewById(R.id.activity_liste_conso_energie_item_conso)).getTextView());
         return convertView;
     }
@@ -74,11 +79,14 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
         for (Evenement e : appareil.getEvenements()) {
             if (e.getIdOrchestra().equals(documentID)) {
                 TextView txtConso = element.get(appareil);
+                if ("conso".equals(e.getAlias().get("nom")) && values != null) {
 
-                try {
-                    txtConso.setText(values.getString(e.getAlias().get("conso")) + " W");
-                } catch (JSONException e1) {
-                    Log.e("json parsing", e1.getMessage());
+                    try {
+                        txtConso.setText(values.getString(e.getAlias().get("nom")) + " W");
+                    } catch (JSONException e1) {
+                        Log.e("json parsing", e1.getMessage());
+                    }
+
                 }
             }
         }
@@ -86,8 +94,8 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
 
     @Override
     public void onDataChanged(String collectionName, String documentID, JSONObject updateValuesJson, String removedValuesJson, Appareil appareil) {
-        updateConso(documentID, updateValuesJson, appareil);
         Log.w("data changed", "collectionName :" + collectionName + "; documentID : " + documentID + "; updateValuesJson : " + updateValuesJson + "; removedValuesJson : " + removedValuesJson);
+        updateConso(documentID, updateValuesJson, appareil);
     }
 
     @Override
@@ -98,6 +106,16 @@ public class ConsoEnergieItemAdapter extends BaseAdapter implements ICallback {
     @Override
     public Watchlist getWatchlist() {
         return watchlist;
+    }
+
+    @Override
+    public void setWatchlist(Watchlist watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    @Override
+    public void reconnect() {
+        MeteorService.getInstance().setCallbackClass(this);
     }
 
     @Override

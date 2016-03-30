@@ -28,7 +28,7 @@ import fr.unice.mbds.maslow.service.MeteorService;
 public class LumieresItemAdapter extends BaseAdapter implements ICallback {
 
     private Context context;
-    private final Watchlist watchlist;
+    private Watchlist watchlist;
     private Map<Appareil, Switch> switchsAppareils = new HashMap<>();
 
     public LumieresItemAdapter(Context context, Watchlist watchlist) {
@@ -163,6 +163,16 @@ public class LumieresItemAdapter extends BaseAdapter implements ICallback {
     @Override
     public Watchlist getWatchlist() {
         return watchlist;
+    }
+
+    @Override
+    public void setWatchlist(Watchlist watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    @Override
+    public void reconnect() {
+        MeteorService.getInstance().setCallbackClass(this);
     }
 
     @Override

@@ -98,6 +98,10 @@ public class UtilisateursItemAdapter extends BaseAdapter {
 
                 }
             });
+        }else {
+            ( convertView).setVisibility(View.INVISIBLE);
+
+
         }
         return convertView;
     }
