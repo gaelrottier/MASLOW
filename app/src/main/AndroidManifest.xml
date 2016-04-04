@@ -21,31 +21,33 @@
             android:name=".view.activity.LoginActivity"
             android:screenOrientation="portrait">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/list_tech" />
+
         </activity>
         <activity
             android:name=".view.activity.MainActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.nfc.action.TECH_DISCOVERED" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-
-            <data android:mimeType="text/plain" />
-        </intent-filter>
-
-        <meta-data
-            android:name="android.nfc.action.TECH_DISCOVERED"
-            android:resource="@xml/list_tech" />
     </activity>
         <activity
             android:name=".view.activity.ListeConsoEnergieActivity"

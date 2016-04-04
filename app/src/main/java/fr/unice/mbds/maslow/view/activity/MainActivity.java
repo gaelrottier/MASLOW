@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         LinkedHashMap<Class<? extends AppCompatActivity>, Integer> listeBoutons = new LinkedHashMap<>();
 
         listeBoutons.put(ListeConsoEnergieActivity.class, R.drawable.prise_electrique);
-        listeBoutons.put(ListeLumieresActivity.class, R.drawable.switch_image);
+       // listeBoutons.put(ListeLumieresActivity.class, R.drawable.switch_image);
 
         adaptor = new MainItemAdapter(getApplicationContext(), listeBoutons);
         gridViewListeBoutons.setAdapter(adaptor);
